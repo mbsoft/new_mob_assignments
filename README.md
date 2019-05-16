@@ -5,9 +5,9 @@ In the shared mobility space, there are a number of different types of shared as
 The goal of this project is to assess development skills suitable for a backend developer position by testing knowledge and proficiency with software design, unit testing and web technologies like HTTP and REST.
 
 - **Project Name:** Skateboard REST API
-- **Project Goal:** Create/define an API that will help skateboarder to share their 'boards'
-- **Technology:** Pick any language, web framework and testing framework you like
-- **Deliverables:**  Submit a pull request on https://mbsoft.github.com/new_mob_assignments that includes your complete solution
+- **Project Goal:** Create/define an API that will help skateboarders to share their 'boards'
+- **Technology:** Pick any language, framework and testing framework you like
+- **Deliverables:**  Submit a pull request on https://github.com/mbsoft/new_mob_assignments that includes your complete solution
 
 **Description: (Note: these stories are intentionally somewhat vague)**
 
@@ -19,7 +19,7 @@ As a skateboard owner I want to be able to modify the details for the board that
 
 As a skateboard borrower, I want to see a list of available boards for rent
 
-**Task:** Build the REST API and background photo resizing described above. Write unit tests for each component.
+**Task:** Build the REST API that might support the stories described above. Write unit tests for each component.
 
 **Requirements:**
 
