@@ -17,7 +17,7 @@ As a skateboard owner I want to be able to indicate that my board is available o
 
 As a skateboard owner I want to be able to modify the details for the board that I share.
 
-As a skateboard borrower, I want to see a list of available boards for rent
+As a skateboard borrower, I want to see a list of available boards
 
 **Task:** Build the REST API that might support the stories described above. Write unit tests for each component.
 
@@ -33,15 +33,15 @@ some examples:
  
   * **Create board:**
 
-    - Request: attributes for a board including the photo as a [HTTP multipart/form-data upload](http://stackoverflow.com/questions/4238809/example-of-multipart-form-data).
-    - Should parse input including file upload, save to a 'database', enqueue background job and send response.
+    - attributes for a board might include the photo
     - To keep things simple, no authentication needs to be performed. 
 
-  * **Get all boards:**
-
-    - Should return all boards in the system ordered by date (newest first).
+  * **Get boards**
+    
+  * **Update board**
   
-  * **Get all boards:**
+  
+ ....
 
 1. Describe your solution in a README and how to run it. Ensure that you clearly state assumptions that you made.
 
