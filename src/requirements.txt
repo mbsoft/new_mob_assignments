@@ -1,0 +1,4 @@
+Django
+djangorestframework
+djangorestframework-camel-case
+psycopg2
