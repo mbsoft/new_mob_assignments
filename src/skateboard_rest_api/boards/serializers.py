@@ -10,6 +10,7 @@ class SkateBoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = SkateBoard
         fields = [
+            'id',
             'owner',
             'brand',
             'weight',
