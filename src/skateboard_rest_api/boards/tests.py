@@ -83,3 +83,13 @@ class BoardsAPITests(TestCase):
 
         # Make sure there are no unexpected fields left in object
         self.assertEqual(len(response_payload), 0)
+
+    def test_get_board_unsuccessful(self):
+        # Create boards
+        non_existent_board_id = len(self.boards)
+
+        uri = '/boards/{}/'.format(non_existent_board_id)
+        response = self.client.get(uri)
+
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
