@@ -160,3 +160,20 @@ class BoardsAPITests(TestCase):
         self.assertGreater(updated_board.updated_at, board.updated_at)
         # It has new owner
         self.assertEqual(updated_board.owner, new_owner)
+
+    def test_delete_board_successful(self):
+        # Grab a board to delete
+        board = self.boards[0]
+
+        uri = '/boards/{}/'.format(board.id)
+        response = self.client.delete(uri)
+
+        # It returns 204 status code
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+        # Confirm that board no longer exists
+        try:
+            nonexistent_board = SkateBoard.objects.get(id=board.id)
+        except SkateBoard.DoesNotExist:
+            nonexistent_board = None
+        self.assertIsNone(nonexistent_board)
