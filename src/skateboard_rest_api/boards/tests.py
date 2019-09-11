@@ -15,6 +15,27 @@ class BoardsAPITests(TestCase):
     def setUp(self):
         self.client = APIClient()
 
+        self.valid_board_data = [
+            {
+                'owner': 'Lorem',
+                'brand': 'Element',
+                'weight': 7.5,
+                'location': 'Brighton, MI'
+            },
+            {
+                'owner': 'Lorem',
+                'brand': 'Enjoi',
+                'weight': 7.6,
+                'location': 'Novi, MI'
+            },
+            {
+                'owner': 'Lorem',
+                'brand': 'Enjoi',
+                'weight': 7.6,
+                'location': 'Novi, MI'
+            },
+        ]
+
     def test_get_boards_successful(self):
         """
         It returns all boards
@@ -22,22 +43,13 @@ class BoardsAPITests(TestCase):
 
         # Create boards
         SkateBoard.objects.create(
-            owner='Lorem',
-            brand='Element',
-            weight=7.5,
-            location='Brighton, MI',
+            **self.valid_board_data[0]
         )
         SkateBoard.objects.create(
-            owner='Lorem',
-            brand='Enjoi',
-            weight=7.6,
-            location='Novi, MI',
+            **self.valid_board_data[1]
         )
         SkateBoard.objects.create(
-            owner='Ipsum',
-            brand='Toy Machine',
-            weight=8.0,
-            location='Los Angeles, CA',
+            **self.valid_board_data[2]
         )
 
         uri = '/boards/'
@@ -48,3 +60,33 @@ class BoardsAPITests(TestCase):
 
         # It return correct amount of boards
         self.assertEqual(len(json.loads(response.content)), 3)
+
+    def test_get_board_successful(self):
+        # Create boards
+        board = SkateBoard.objects.create(
+            **self.valid_board_data[0]
+        )
+
+        uri = '/boards/{}/'.format(board.id)
+        response = self.client.get(uri)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # It returns correct payload
+        response_payload = json.loads(response.content)
+        expected_fields = [
+            'id',
+            'owner',
+            'brand',
+            'weight',
+            'location',
+            'created_at',
+            'updated_at',
+        ]
+        for field_name in expected_fields:
+            self.assertTrue(field_name in response_payload)
+            # Remove field from payload
+            del response_payload[field_name]
+
+        # Make sure there are no unexpected fields left in object
+        self.assertTrue(len(response_payload), 0)
