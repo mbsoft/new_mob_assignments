@@ -53,6 +53,14 @@ class BoardsAPITests(TestCase):
                 SkateBoard.objects.create(**board_def)
             )
 
+        # Definition to use for creating another board
+        self.new_board_def = {
+            'owner': 'Ipsum',
+            'brand': 'Habitat',
+            'weight': 6.5,
+            'location': 'Los Angeles, CA'
+        }
+
     def test_get_boards_successful(self):
         """
         It returns all boards
@@ -86,7 +94,7 @@ class BoardsAPITests(TestCase):
         self.assertEqual(len(response_payload), 0)
 
     def test_get_board_unsuccessful(self):
-        # Create boards
+        # Get non existent board id
         non_existent_board_id = len(self.boards)
 
         uri = '/boards/{}/'.format(non_existent_board_id)
@@ -95,15 +103,9 @@ class BoardsAPITests(TestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_create_board_successful(self):
-        board_def = {
-            'owner': 'Ipsum',
-            'brand': 'Habitat',
-            'weight': 6.5,
-            'location': 'Los Angeles, CA'
-        }
-
+        # Create board
         uri = '/boards/'
-        response = self.client.post(uri, data=json.dumps(board_def), content_type='application/json')
+        response = self.client.post(uri, data=json.dumps(self.new_board_def), content_type='application/json')
 
         # It returns 201 status code
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -114,11 +116,22 @@ class BoardsAPITests(TestCase):
             # Field exists
             self.assertTrue(field_name in response_payload)
             # Value matches POST payload
-            if field_name in board_def:
-                self.assertTrue(response_payload[field_name], board_def[field_name])
+            if field_name in self.new_board_def:
+                self.assertTrue(response_payload[field_name], self.new_board_def[field_name])
 
             # Remove field from payload
             del response_payload[field_name]
 
         # Make sure there are no unexpected fields left in object
         self.assertEqual(len(response_payload), 0)
+
+    def test_create_board_unsuccessful(self):
+        # Create bad board definition by removing the owner field
+        bad_board_def = self.new_board_def.copy()
+        del bad_board_def['owner']
+
+        uri = '/boards/'
+        response = self.client.post(uri, data=json.dumps(bad_board_def), content_type='application/json')
+
+        # It returns 400 status code
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
