@@ -1,3 +1,5 @@
+import json
+
 from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIClient
@@ -43,3 +45,6 @@ class BoardsAPITests(TestCase):
 
         # It returns 200 status code
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # It return correct amount of boards
+        self.assertEqual(len(json.loads(response.content)), 3)
