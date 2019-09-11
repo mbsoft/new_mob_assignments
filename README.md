@@ -1,57 +1,71 @@
 ### Skateboard REST API
 
-In the shared mobility space, there are a number of different types of shared assets - cars, scooters, ebikes. For this project, we want to create a starting point for an API that will allow individual skateboarders to share their boards. 
+This project defines a very simple REST API for sharing Skateboards. It defines the following endpoints:
 
-The goal of this project is to assess development skills suitable for a backend developer position by testing knowledge and proficiency with software design, unit testing and web technologies like HTTP and REST.
+- **GET /boards/** - List All Skateboards
+- **POST /boards/** - Create New Skateboard
+- **GET /boards/:id/** - Get One Skateboard
+- **PUT /boards/:id/** - Update One Skateboard
+- **DELETE /boards/:id/** - Delete One Skateboard
+- **GET /boards/available/** - List All Available Skateboards
 
-- **Project Name:** Skateboard REST API
-- **Project Goal:** Create/define an API that will help skateboarders to share their 'boards'
-- **Technology:** Pick any language, framework and testing framework you like
-- **Deliverables:**  Submit a pull request on https://github.com/mbsoft/new_mob_assignments that includes your complete solution
+When retrieving Skateboards the will have the following JSON members:
+```json
+{
+    "id": 1,
+    "owner": "Lorem",
+    "brand": "Element",
+    "weight": 7.5,
+    "location": "Brighton, MI",
+    "is_available": true,
+    "created_at": "2019-09-11T18:10:19.077217Z",
+    "updated_at": "2019-09-11T19:27:44.038182Z"
+}
+```
 
-**Description: (Note: these stories are intentionally somewhat vague)**
+When creating and updating Skateboards you only need to include the following JSON members:
+```json
+{
+    "id": 1,
+    "owner": "Lorem",
+    "brand": "Element",
+    "weight": 7.5,
+    "location": "Brighton, MI",
+    "is_available": true
+}
+```
 
+#### Working with this solution
+
+This project assumes that the user has Docker and docker-compose installed on their system
+
+##### To Run tests
+
+```shell
+docker-compose run www ./manage.py test
+```
+
+##### To Run Development Server
+
+```shell
+docker-compose run www ./manage.py migrate
+docker-compose up
+```
+
+##### To Run User stories
 As a skateboard owner I want to be able to add my individual board to a skateboard sharing marketplace.
-
-As a skateboard owner I want to be able to indicate that my board is available or unavailable for sharing
-
+```shell
+curl -X POST -H "Content-Type: application/json" http://localhost:8000/boards/ --data '{"owner": "Lorem", "brand": "Element", "weight": 7.5, "location": "Brighton, MI", "is_available": true}'
+```
+As a skateboard owner I want to be able to indicate that my board is available or unavailable for sharing (modify the is_available member)
+```shell
+curl -X PUT -H "Content-Type: application/json" http://localhost:8000/boards/1/ --data '{"id": 1, "owner": "Lorem", "brand": "Element", "weight": 7.5, "location": "Brighton, MI", "is_available": true}'
+```
 As a skateboard owner I want to be able to modify the details for the board that I share.
-
+```shell
+curl -X PUT -H "Content-Type: application/json" http://localhost:8000/boards/1/ --data '{"id": 1, "owner": "Lorem", "brand": "Element", "weight": 7.0, "location": "Brighton, MI", "is_available": true}'
+```
 As a skateboard borrower, I want to see a list of available boards
-
-**Task:** Build the REST API that might support the stories described above. Write unit tests for each component.
-
-**Requirements:**
-
-1. Design your API in a RESTful way and respond with JSON.
-1. Make sure your code has tests.
-Write the code and design your system to be as realistic and production-ready as possible. Follow best-practices and focus on quality.
-1. A skateboard might have the following attributes: name of owner, brand, weight, length, location, timestamp and any other attribution you deem necessary
-1. Add endpoints that support your solution 
-
-some examples:
- 
-  * **Create board:**
-
-    - attributes for a board might include the photo
-    - To keep things simple, no authentication needs to be performed. 
-
-  * **Get boards**
-    
-  * **Update board**
-  
-  
- ....
-
-1. Describe your solution in a README and how to run it. Ensure that you clearly state assumptions that you made.
-
-
-**Guidelines**
-
-Please commit early and often and with good commit messages. This will allow us to see how you've approached the problem. Don't worry about changing things around often.
-
-Please ask any questions if something is unclear
-
-**What is this?**
-
-This repo contains the job assignment for potential Backend engineers in DENSO's New Mobility team.
+```shell
+curl http://localhost:8000/boards/available/
+```
