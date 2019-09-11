@@ -15,7 +15,7 @@ class BoardsAPITests(TestCase):
     def setUp(self):
         self.client = APIClient()
 
-        self.valid_board_data = [
+        valid_board_data = [
             {
                 'owner': 'Lorem',
                 'brand': 'Element',
@@ -36,22 +36,17 @@ class BoardsAPITests(TestCase):
             },
         ]
 
+        # Create boards
+        self.boards = []
+        for board_def in valid_board_data:
+            self.boards.append(
+                SkateBoard.objects.create(**board_def)
+            )
+
     def test_get_boards_successful(self):
         """
         It returns all boards
         """
-
-        # Create boards
-        SkateBoard.objects.create(
-            **self.valid_board_data[0]
-        )
-        SkateBoard.objects.create(
-            **self.valid_board_data[1]
-        )
-        SkateBoard.objects.create(
-            **self.valid_board_data[2]
-        )
-
         uri = '/boards/'
         response = self.client.get(uri)
 
@@ -63,9 +58,7 @@ class BoardsAPITests(TestCase):
 
     def test_get_board_successful(self):
         # Create boards
-        board = SkateBoard.objects.create(
-            **self.valid_board_data[0]
-        )
+        board = self.boards[0]
 
         uri = '/boards/{}/'.format(board.id)
         response = self.client.get(uri)
