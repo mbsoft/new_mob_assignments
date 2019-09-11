@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp-dev-db:/var/lib/postgresql/data
+  www:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=skateboard_rest_api.settings.development
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/src
