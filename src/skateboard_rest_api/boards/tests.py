@@ -15,6 +15,16 @@ class BoardsAPITests(TestCase):
     def setUp(self):
         self.client = APIClient()
 
+        self.expected_fields = [
+            'id',
+            'owner',
+            'brand',
+            'weight',
+            'location',
+            'created_at',
+            'updated_at',
+        ]
+
         valid_board_data = [
             {
                 'owner': 'Lorem',
@@ -67,16 +77,7 @@ class BoardsAPITests(TestCase):
 
         # It returns correct payload
         response_payload = json.loads(response.content)
-        expected_fields = [
-            'id',
-            'owner',
-            'brand',
-            'weight',
-            'location',
-            'created_at',
-            'updated_at',
-        ]
-        for field_name in expected_fields:
+        for field_name in self.expected_fields:
             self.assertTrue(field_name in response_payload)
             # Remove field from payload
             del response_payload[field_name]
@@ -93,3 +94,31 @@ class BoardsAPITests(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
+    def test_create_board_successful(self):
+        board_def = {
+            'owner': 'Ipsum',
+            'brand': 'Habitat',
+            'weight': 6.5,
+            'location': 'Los Angeles, CA'
+        }
+
+        uri = '/boards/'
+        response = self.client.post(uri, data=json.dumps(board_def), content_type='application/json')
+
+        # It returns 201 status code
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        # It returns correct payload
+        response_payload = json.loads(response.content)
+        for field_name in self.expected_fields:
+            # Field exists
+            self.assertTrue(field_name in response_payload)
+            # Value matches POST payload
+            if field_name in board_def:
+                self.assertTrue(response_payload[field_name], board_def[field_name])
+
+            # Remove field from payload
+            del response_payload[field_name]
+
+        # Make sure there are no unexpected fields left in object
+        self.assertEqual(len(response_payload), 0)
