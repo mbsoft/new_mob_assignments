@@ -89,4 +89,4 @@ class BoardsAPITests(TestCase):
             del response_payload[field_name]
 
         # Make sure there are no unexpected fields left in object
-        self.assertTrue(len(response_payload), 0)
+        self.assertEqual(len(response_payload), 0)
