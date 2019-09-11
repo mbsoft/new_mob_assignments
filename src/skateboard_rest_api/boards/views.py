@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from .models import SkateBoard
+from .serializers import SkateBoardSerializer
+
+
+class SkateBoardViewSet(viewsets.ModelViewSet):
+    """
+    Default CRUD Views for SkateBoard Model using basic DRF model view set
+    """
+    queryset = SkateBoard.objects.all()
+    serializer_class = SkateBoardSerializer
