@@ -15,6 +15,7 @@ class SkateBoardSerializer(serializers.ModelSerializer):
             'brand',
             'weight',
             'location',
+            'is_available',
             'created_at',
             'updated_at'
         ]
