@@ -5,6 +5,7 @@ from rest_framework import status
 from rest_framework.test import APIClient
 
 from .models import SkateBoard
+from .serializers import SkateBoardSerializer
 
 
 class BoardsAPITests(TestCase):
@@ -135,3 +136,27 @@ class BoardsAPITests(TestCase):
 
         # It returns 400 status code
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_update_board_successful(self):
+        # Grab a board to update
+        board = self.boards[0]
+        new_owner = 'Dolor'
+        board.owner = new_owner
+
+        updated_board_def = SkateBoardSerializer(board).data
+
+        del updated_board_def['updated_at']
+        del updated_board_def['created_at']
+
+        uri = '/boards/{}/'.format(board.id)
+        response = self.client.put(uri, data=json.dumps(updated_board_def), content_type='application/json')
+
+        # It returns 200 status code
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Get board to confirm updated values
+        updated_board = SkateBoard.objects.get(id=board.id)
+        # It has newer updated timestamp that before update
+        self.assertGreater(updated_board.updated_at, board.updated_at)
+        # It has new owner
+        self.assertEqual(updated_board.owner, new_owner)
