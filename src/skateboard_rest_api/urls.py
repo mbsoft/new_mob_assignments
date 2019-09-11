@@ -16,7 +16,7 @@ Including another URLconf
 from django.urls import include, path
 from rest_framework import routers
 
-from .boards.views import SkateBoardViewSet
+from .boards.views import AvailableSkateBoardView, SkateBoardViewSet
 
 # Create router
 router = routers.DefaultRouter()
@@ -25,5 +25,8 @@ router.register(r'boards', SkateBoardViewSet)
 
 # Include urls created by router
 urlpatterns = [
+    # Register available boards endpoint with the router
+    path(r'boards/available/', AvailableSkateBoardView.as_view()),
+    # Include the rest of the routes
     path(r'', include(router.urls)),
 ]

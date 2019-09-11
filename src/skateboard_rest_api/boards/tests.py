@@ -80,6 +80,19 @@ class BoardsAPITests(TestCase):
         # It return correct amount of boards
         self.assertEqual(len(json.loads(response.content)), 3)
 
+    def test_get_boards_with_availability_filter(self):
+        """
+        It returns all available boards
+        """
+        uri = '/boards/available/'
+        response = self.client.get(uri)
+
+        # It returns 200 status code
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # It return correct amount of available boards
+        self.assertEqual(len(json.loads(response.content)), 2)
+
     def test_get_board_successful(self):
         # Create boards
         board = self.boards[0]
