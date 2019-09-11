@@ -22,6 +22,7 @@ class BoardsAPITests(TestCase):
             'brand',
             'weight',
             'location',
+            'is_available',
             'created_at',
             'updated_at',
         ]
@@ -31,19 +32,22 @@ class BoardsAPITests(TestCase):
                 'owner': 'Lorem',
                 'brand': 'Element',
                 'weight': 7.5,
-                'location': 'Brighton, MI'
+                'location': 'Brighton, MI',
+                'is_available': True,
             },
             {
                 'owner': 'Lorem',
                 'brand': 'Enjoi',
                 'weight': 7.6,
-                'location': 'Novi, MI'
+                'location': 'Novi, MI',
+                'is_available': False,
             },
             {
                 'owner': 'Ipsum',
                 'brand': 'Toy Machine',
                 'weight': 8.0,
-                'location': 'Los Angeles, CA'
+                'location': 'Los Angeles, CA',
+                'is_available': True,
             },
         ]
 
@@ -59,7 +63,8 @@ class BoardsAPITests(TestCase):
             'owner': 'Ipsum',
             'brand': 'Habitat',
             'weight': 6.5,
-            'location': 'Los Angeles, CA'
+            'location': 'Los Angeles, CA',
+            'is_available': False,
         }
 
     def test_get_boards_successful(self):
@@ -118,7 +123,7 @@ class BoardsAPITests(TestCase):
             self.assertTrue(field_name in response_payload)
             # Value matches POST payload
             if field_name in self.new_board_def:
-                self.assertTrue(response_payload[field_name], self.new_board_def[field_name])
+                self.assertEqual(response_payload[field_name], self.new_board_def[field_name])
 
             # Remove field from payload
             del response_payload[field_name]
