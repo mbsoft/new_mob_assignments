@@ -22,7 +22,7 @@ class BoardsAPITests(TestCase):
             'brand',
             'weight',
             'location',
-            'is_available'
+            'is_available',
             'created_at',
             'updated_at',
         ]
@@ -123,7 +123,7 @@ class BoardsAPITests(TestCase):
             self.assertTrue(field_name in response_payload)
             # Value matches POST payload
             if field_name in self.new_board_def:
-                self.assertTrue(response_payload[field_name], self.new_board_def[field_name])
+                self.assertEqual(response_payload[field_name], self.new_board_def[field_name])
 
             # Remove field from payload
             del response_payload[field_name]
