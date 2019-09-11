@@ -29,10 +29,10 @@ class BoardsAPITests(TestCase):
                 'location': 'Novi, MI'
             },
             {
-                'owner': 'Lorem',
-                'brand': 'Enjoi',
-                'weight': 7.6,
-                'location': 'Novi, MI'
+                'owner': 'Ipsum',
+                'brand': 'Toy Machine',
+                'weight': 8.0,
+                'location': 'Los Angeles, CA'
             },
         ]
 
