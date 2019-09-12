@@ -188,7 +188,7 @@ class BoardsAPITests(TestCase):
         }
 
         uri = '/boards/{}/available/'.format(board.id)
-        response = self.client.post(uri, data=json.dumps(payload), content_type='application/json')
+        response = self.client.put(uri, data=json.dumps(payload), content_type='application/json')
 
         # It returns 200 status code
         self.assertEqual(response.status_code, status.HTTP_200_OK)
