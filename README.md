@@ -7,6 +7,7 @@ This project defines a very simple REST API for sharing Skateboards. It defines 
 - **GET /boards/:id/** - Get One Skateboard
 - **PUT /boards/:id/** - Update One Skateboard
 - **DELETE /boards/:id/** - Delete One Skateboard
+- **PUT /boards/:id/available/ - Update board availability
 - **GET /boards/available/** - List All Available Skateboards
 
 When retrieving Skateboards the will have the following JSON members:
@@ -35,6 +36,13 @@ When creating and updating Skateboards you only need to include the following JS
 }
 ```
 
+When using the update availability action use the following payload
+```json
+{
+    "is_available": true
+}
+```
+
 #### Working with this solution
 
 This project assumes that the user has Docker and docker-compose installed on their system
@@ -59,7 +67,7 @@ curl -X POST -H "Content-Type: application/json" http://localhost:8000/boards/ -
 ```
 As a skateboard owner I want to be able to indicate that my board is available or unavailable for sharing (modify the is_available member)
 ```shell
-curl -X PUT -H "Content-Type: application/json" http://localhost:8000/boards/1/ --data '{"id": 1, "owner": "Lorem", "brand": "Element", "weight": 7.5, "location": "Brighton, MI", "is_available": true}'
+curl -X PUT -H "Content-Type: application/json" http://localhost:8000/boards/1/available/ --data '{"is_available": true}'
 ```
 As a skateboard owner I want to be able to modify the details for the board that I share.
 ```shell
