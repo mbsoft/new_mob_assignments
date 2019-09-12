@@ -19,3 +19,14 @@ class SkateBoardSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at'
         ]
+
+
+class AvailabilitySerializer(serializers.ModelSerializer):
+    """
+    Skate Board model serializer - Availability Only
+    """
+    class Meta:
+        model = SkateBoard
+        fields = [
+            'is_available',
+        ]
