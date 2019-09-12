@@ -7,7 +7,7 @@ This project defines a very simple REST API for sharing Skateboards. It defines 
 - **GET /boards/:id/** - Get One Skateboard
 - **PUT /boards/:id/** - Update One Skateboard
 - **DELETE /boards/:id/** - Delete One Skateboard
-- **PUT /boards/:id/available/ - Update board availability
+- **PUT /boards/:id/available/** - Update board availability
 - **GET /boards/available/** - List All Available Skateboards
 
 When retrieving Skateboards the will have the following JSON members:
