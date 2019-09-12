@@ -179,6 +179,27 @@ class BoardsAPITests(TestCase):
         # It has new owner
         self.assertEqual(updated_board.owner, new_owner)
 
+    def test_board_set_available_successful(self):
+        # Grab a board to delete
+        board = self.boards[0]
+
+        payload = {
+            'is_available': False,
+        }
+
+        uri = '/boards/{}/available/'.format(board.id)
+        response = self.client.post(uri, data=json.dumps(payload), content_type='application/json')
+
+        # It returns 200 status code
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Confirm that return object matches request payload
+        self.assertEqual(json.loads(response.content)['is_available'], payload['is_available'])
+
+        # Confirm that board availability matches payload
+        board.refresh_from_db()
+        self.assertEqual(board.is_available, payload['is_available'])
+
     def test_delete_board_successful(self):
         # Grab a board to delete
         board = self.boards[0]
