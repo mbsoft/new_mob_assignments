@@ -23,5 +23,6 @@ dependencies {
 	compile 'com.sun.jersey:jersey-core:1.13'
 	compile 'com.sun.jersey:jersey-servlet:1.13'
     compile 'org.eclipse.jetty:jetty-jsp:9.1.0.M0' 
-	testCompile "junit:junit-dep:4.10"
+	testCompile "junit:junit:4.12"
+	testCompile 'org.mockito:mockito-all:1.9.5'
 }
