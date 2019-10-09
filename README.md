@@ -1,6 +1,6 @@
 ### Skateboard REST API
 
-In the shared mobility space, there are a number of different types of shared assets - cars, scooters, ebikes. For this project, we want to create a starting point for an API that will allow individual skateboarders to share their boards. 
+In the shared mobility space, there are a number of different types of shared assets - cars, scooters, ebikes. For this project, we want to create a starting point for an API that will allow individual skateboarders to share their boards.
 
 The goal of this project is to assess development skills suitable for a backend developer position by testing knowledge and proficiency with software design, unit testing and web technologies like HTTP and REST.
 
@@ -27,20 +27,20 @@ As a skateboard borrower, I want to see a list of available boards
 1. Make sure your code has tests.
 Write the code and design your system to be as realistic and production-ready as possible. Follow best-practices and focus on quality.
 1. A skateboard might have the following attributes: name of owner, brand, weight, length, location, timestamp and any other attribution you deem necessary
-1. Add endpoints that support your solution 
+1. Add endpoints that support your solution
 
 some examples:
- 
+
   * **Create board:**
 
     - attributes for a board might include the photo
-    - To keep things simple, no authentication needs to be performed. 
+    - To keep things simple, no authentication needs to be performed.
 
   * **Get boards**
-    
+
   * **Update board**
-  
-  
+
+
  ....
 
 1. Describe your solution in a README and how to run it. Ensure that you clearly state assumptions that you made.
@@ -55,3 +55,4 @@ Please ask any questions if something is unclear
 **What is this?**
 
 This repo contains the job assignment for potential Backend engineers in DENSO's New Mobility team.
+=======
