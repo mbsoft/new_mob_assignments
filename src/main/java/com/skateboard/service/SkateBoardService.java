@@ -27,6 +27,11 @@ public class SkateBoardService {
 		
 		return skateBoard;
 	}
+
+	public boolean changeBoardAvailability(Integer skateboardId) {
+		//call dao and toggle boolean
+		return false;
+	}
 	
 	
 			

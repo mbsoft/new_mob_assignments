@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -76,8 +77,23 @@ public class SkateBoardResource {
 	}
 	
 	
-	
-	
+	@Path("/{id}")
+	@PUT
+	public Response changeBoardAvailability(@PathParam("id")Integer skateboardId) {
+		
+		boolean isUpdated = skateBoardService.changeBoardAvailability(skateboardId);
+		Status status = null;
+		if(isUpdated) {
+			
+			status =	Response.Status.OK ;
+		}
+		else {
+			status = Response.Status.NOT_FOUND;
+		}
+		return Response
+			      .status(status)
+			      .build();
+	}
 	
 	
 

@@ -177,4 +177,22 @@ public class SkateBoardResourceTest {
 		
 		assertEquals(expectedResponse,actualResponse.getStatus());
 	}
+	
+	@Test
+	public void changeBoardAvailability_returnsErrorCode_WhenUpdationFails() {
+		int expectedResponse = 404;
+		when(skateBoardService.changeBoardAvailability(anyInt())).thenReturn(false);
+		
+		Response actualResponse =skateBoardResource.changeBoardAvailability(1);
+		assertEquals(expectedResponse,actualResponse.getStatus());
+	}
+	
+	@Test
+	public void changeBoardAvailability_returnsSuccessfulCode_WhenUpdationIsSuccessful() {
+		int expectedResponse = 200;
+		when(skateBoardService.changeBoardAvailability(anyInt())).thenReturn(true);
+		
+		Response actualResponse =skateBoardResource.changeBoardAvailability(1);
+		assertEquals(expectedResponse,actualResponse.getStatus());
+	}
 }
