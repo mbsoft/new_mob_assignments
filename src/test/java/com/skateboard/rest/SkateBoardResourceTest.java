@@ -1,7 +1,6 @@
 package com.skateboard.rest;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
@@ -14,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.skateboard.model.SkateBoard;
@@ -105,7 +105,7 @@ public class SkateBoardResourceTest {
 	}
 
 	@Test
-	public void getSkateBoard_returns_correctSkateBoard() {
+	public void getSkateBoard_returnsCorrectSkateBoard() {
 		SkateBoard skateboard1 = new SkateBoard();
 		skateboard1.setId(1);
 		skateboard1.setOwnerName("Nandhinee");
@@ -121,7 +121,7 @@ public class SkateBoardResourceTest {
 	}
 	
 	@Test
-	public void getAvailableBoards_returns_availableBoards() {
+	public void getAvailableBoards_returnsAvailableBoards() {
 		ArrayList<SkateBoard> availableSkateBoards = new ArrayList<>();
 		
 		SkateBoard skateboard1 = new SkateBoard();
@@ -146,5 +146,35 @@ public class SkateBoardResourceTest {
 		for(SkateBoard skateboard: responseBoardList) {
 			assertEquals(true,skateboard.isBoardAvailable());
 		}
+	}
+	
+	@Test
+	public void createSkateBoard_returnsCreatedSuccessfullyCode_WhenIdIsSet() {
+		SkateBoard skateboard1 = new SkateBoard();
+		skateboard1.setId(1);
+		skateboard1.setOwnerName("Nandhinee");
+		skateboard1.setBoardAvailable(true);
+		
+		int expectedResponse = 201;
+		
+		when(skateBoardService.createSkateBoard(Mockito.any())).thenReturn(skateboard1);
+		
+		Response actualResponse = skateBoardResource.createSkateBoard(skateboard1);
+		
+		assertEquals(expectedResponse,actualResponse.getStatus());
+	}
+	@Test
+	public void createSkateBoard_returnsErrorCode_WhenCreationFailsAndIdIsNotSet() {
+		SkateBoard skateboard1 = new SkateBoard();
+		skateboard1.setOwnerName("Nandhinee");
+		skateboard1.setBoardAvailable(true);
+		
+		int expectedResponse = 500;
+		
+		when(skateBoardService.createSkateBoard(Mockito.any())).thenReturn(skateboard1);
+		
+		Response actualResponse = skateBoardResource.createSkateBoard(skateboard1);
+		
+		assertEquals(expectedResponse,actualResponse.getStatus());
 	}
 }

@@ -18,6 +18,15 @@ public class SkateBoardService {
 		
 		return skateBoardDao.getSkateBoardById(skateboardId);
 	}
+
+	public SkateBoard createSkateBoard(SkateBoard skateBoard) {
+		int newSkateBoardId = skateBoardDao.createSkateBoard(skateBoard);
+		if(newSkateBoardId > 0 ) {
+			skateBoard.setId(newSkateBoardId);
+		}
+		
+		return skateBoard;
+	}
 	
 	
 			

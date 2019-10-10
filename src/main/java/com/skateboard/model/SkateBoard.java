@@ -8,6 +8,7 @@ public class SkateBoard {
 	private int weight;
 	private int length;
 	private boolean isBoardAvailable;
+	 
 	
 	
 	public int getId() {
