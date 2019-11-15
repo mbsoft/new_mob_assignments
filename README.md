@@ -7,7 +7,7 @@ The goal of this project is to assess development skills suitable for a backend 
 - **Project Name:** Skateboard REST API
 - **Project Goal:** Create/define an API that will help skateboarders to share their 'boards'
 - **Technology:** Pick any language, framework and testing framework you like
-- **Deliverables:**  Submit a pull request on https://github.com/mbsoft/new_mob_assignments that includes your complete solution
+- **Deliverables:**  Fork the project into your own account. Submit a pull request on https://github.com/mbsoft/new_mob_assignments that includes your complete solution
 
 **Description: (Note: these stories are intentionally somewhat vague)**
 
@@ -25,10 +25,11 @@ As a skateboard borrower, I want to see a list of available boards
 
 1. Design your API in a RESTful way and respond with JSON.
 1. Make sure your code has tests.
-Write the code and design your system to be as realistic and production-ready as possible. Follow best-practices and focus on quality.
+1. Consider some form of logging
+1. Write the code and design your system to be as realistic and production-ready as possible. Follow best-practices and focus on quality.
 1. A skateboard might have the following attributes: name of owner, brand, weight, length, location, timestamp and any other attribution you deem necessary
 1. Add endpoints that support your solution 
-
+1. Bonus points for adding any kind of front-end that can be used to visualize available boards through use of the designed APIs
 some examples:
  
   * **Create board:**
@@ -50,6 +51,8 @@ some examples:
 
 Please commit early and often and with good commit messages. This will allow us to see how you've approached the problem. Don't worry about changing things around often.
 
+Be prepared to discuss some of your approaches and design decisions.
+ 
 Please ask any questions if something is unclear
 
 **What is this?**
