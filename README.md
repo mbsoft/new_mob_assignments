@@ -32,14 +32,18 @@ As a skateboard borrower, I want to see a list of available boards
 1. Bonus points for adding any kind of front-end that can be used to visualize available boards through use of the designed APIs
 some examples:
  
-  * **Create board:**
+  * **Create skateboard:**
 
-    - attributes for a board might include the photo
+    - attributes for a board might include the photo, dimensions, specs etc.
     - To keep things simple, no authentication needs to be performed. 
 
-  * **Get boards**
+  * **Get skateboards**
+    - perhaps based on status, spec filter etc.
     
-  * **Update board**
+  * **Update skateboard**
+    - change status, add additional details/specs etc.
+  
+  * **Delete skateboard**
   
   
  ....
