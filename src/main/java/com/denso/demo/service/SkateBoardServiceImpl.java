@@ -1,6 +1,7 @@
 package com.denso.demo.service;
 
 import com.denso.demo.domain.SkateBoard;
+import com.denso.demo.entity.SkateBoardEntity;
 import com.denso.demo.repository.SkateBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,11 @@ public class SkateBoardServiceImpl implements SkateBoardService {
 
         return skateBoardRepository.findAll()
                 .stream()
+                .filter(SkateBoardEntity::isAvailable)
                 .map(entity -> SkateBoard.builder()
                         .name(entity.getName())
-                        .description(entity.getDescription()).build())
+                        .description(entity.getDescription())
+                        .build())
                 .collect(Collectors.toList());
     }
 }

@@ -10,9 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -25,7 +25,7 @@ public class SkateBoardServiceImplTest {
     private SkateBoardRepository skateBoardRepository;
 
     @Test
-    public void getAllAvailableSkateBoards_shouldReturnEmpty_whenRepositoryReturnsEmpty() {
+    public void getAllAvailableSkateBoards_givenEmptySkateBoardList_shouldReturnEmpty() {
 
         when(skateBoardRepository.findAll()).thenReturn(Lists.emptyList());
 
@@ -35,13 +35,23 @@ public class SkateBoardServiceImplTest {
     }
 
     @Test
-    public void getAllAvailableSkateBoards_shouldReturnSkateBoard_whenRepositoryReturnsNonEmptyList() {
+    public void getAllAvailableSkateBoards_givenAvailableSkateBoardList_shouldReturnSkateBoard() {
 
-        when(skateBoardRepository.findAll()).thenReturn(Arrays.asList(SkateBoardEntity.builder().name("name").description("description").build()));
+        when(skateBoardRepository.findAll()).thenReturn(singletonList(SkateBoardEntity.builder().name("name").description("description").available(true).build()));
 
         List<SkateBoard> actual = classUnderTest.getAllAvailableSkateBoards();
 
         assertThat(actual).hasSize(1);
         assertThat(actual.get(0)).isEqualToComparingFieldByField(SkateBoard.builder().name("name").description("description").build());
+    }
+
+    @Test
+    public void getAllAvailableSkateBoards_givenNonEmptyUnavailableSkateBoardEntities_shouldReturnEmptyList() {
+
+        when(skateBoardRepository.findAll()).thenReturn(singletonList(SkateBoardEntity.builder().name("name").description("description").available(false).build()));
+
+        List<SkateBoard> actual = classUnderTest.getAllAvailableSkateBoards();
+
+        assertThat(actual).isEmpty();
     }
 }
