@@ -12,6 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -46,12 +47,14 @@ public class SkateBoardServiceImplTest {
     }
 
     @Test
-    public void getAllAvailableSkateBoards_givenNonEmptyUnavailableSkateBoardEntities_shouldReturnEmptyList() {
+    public void getAllAvailableSkateBoards_givenNonEmptyListWithUnavailableSkateBoardEntities_shouldReturnEmptyList() {
 
-        when(skateBoardRepository.findAll()).thenReturn(singletonList(SkateBoardEntity.builder().name("name").description("description").available(false).build()));
+        when(skateBoardRepository.findAll()).thenReturn(asList(SkateBoardEntity.builder().name("name").description("description").available(false).build(),
+                SkateBoardEntity.builder().name("name").description("description").available(true).build()));
 
         List<SkateBoard> actual = classUnderTest.getAllAvailableSkateBoards();
 
-        assertThat(actual).isEmpty();
+        assertThat(actual).hasSize(1);
+        assertThat(actual.get(0)).isEqualToComparingFieldByField(SkateBoard.builder().name("name").description("description").build());
     }
 }
