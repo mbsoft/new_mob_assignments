@@ -15,6 +15,8 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -56,5 +58,21 @@ public class SkateBoardServiceImplTest {
 
         assertThat(actual).hasSize(1);
         assertThat(actual.get(0)).isEqualToComparingFieldByField(SkateBoard.builder().name("name").description("description").build());
+    }
+
+    @Test
+    public void addSkateBoard_givenNullSkateBoard_doNotCallRepositorySave() {
+
+        classUnderTest.addSkateBoard(SkateBoard.builder().name("name").description("description").build());
+
+        verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().name("name").description("description").build()));
+    }
+
+    @Test
+    public void addSkateBoard_givenSkateBoard_callRepositorySave() {
+
+        classUnderTest.addSkateBoard(SkateBoard.builder().name("name").description("description").build());
+
+        verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().name("name").description("description").build()));
     }
 }

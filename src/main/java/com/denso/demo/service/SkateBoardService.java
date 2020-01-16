@@ -7,4 +7,6 @@ import java.util.List;
 public interface SkateBoardService {
 
     List<SkateBoard> getAllAvailableSkateBoards();
+
+    void addSkateBoard(SkateBoard skateBoard);
 }

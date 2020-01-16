@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Optional.of;
+
 @Service
 @RequiredArgsConstructor
 public class SkateBoardServiceImpl implements SkateBoardService {
@@ -26,5 +28,17 @@ public class SkateBoardServiceImpl implements SkateBoardService {
                         .description(entity.getDescription())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void addSkateBoard(SkateBoard skateBoard) {
+
+        of(skateBoard)
+                .map(board -> SkateBoardEntity.builder()
+                        .name(skateBoard.getName())
+                        .description(skateBoard.getDescription())
+                        .build())
+                .ifPresent(skateBoardRepository::save);
+
     }
 }
