@@ -16,11 +16,19 @@ public class SkateBoardController {
 
     @GetMapping
     public List<SkateBoard> getSkateBoards() {
+
         return skateBoardService.getAllAvailableSkateBoards();
     }
 
     @PostMapping
     public void addSkateBoard(@RequestBody SkateBoard skateBoard) {
+
         skateBoardService.addSkateBoard(skateBoard);
+    }
+
+    @PutMapping("/{ownerName}")
+    public void updateSkateBoardAvailability(@PathVariable String ownerName, @RequestParam boolean available) {
+
+        skateBoardService.updateSkateBoardAvailability(ownerName, available);
     }
 }

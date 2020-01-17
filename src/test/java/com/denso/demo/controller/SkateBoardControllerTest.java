@@ -36,7 +36,7 @@ public class SkateBoardControllerTest {
                 .get("/skate-board")
                 .then()
                 .statusCode(200)
-                .body(is("[{\"ownerName\":\"ownerName\",\"description\":\"description\"}]"));
+                .body(is("[{\"ownerName\":\"ownerName\",\"description\":\"description\",\"brand\":null,\"weight\":null,\"length\":null,\"location\":null,\"timestamp\":null}]"));
     }
 
     @Test
@@ -54,5 +54,24 @@ public class SkateBoardControllerTest {
                 .statusCode(200);
 
         verify(skateBoardService).addSkateBoard(skateBoard);
+    }
+
+
+    @Test
+    public void updateSkateBoardAvailability_givenAPICallToPutSkateBoard_return200AsStatusCode() {
+
+        SkateBoard skateBoard = SkateBoard.builder().ownerName("ownerName").description("description").build();
+
+        given()
+                .standaloneSetup(new SkateBoardController(skateBoardService))
+                .header(CONTENT_TYPE, "application/json")
+                .queryParam("available", true)
+                .body(new Gson().toJson(skateBoard))
+                .when()
+                .put("/skate-board/ownerName")
+                .then()
+                .statusCode(200);
+
+        verify(skateBoardService).updateSkateBoardAvailability("ownerName", true);
     }
 }
