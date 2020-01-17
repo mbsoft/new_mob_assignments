@@ -24,7 +24,7 @@ public class SkateBoardServiceImpl implements SkateBoardService {
                 .stream()
                 .filter(SkateBoardEntity::isAvailable)
                 .map(entity -> SkateBoard.builder()
-                        .ownerName(entity.getName())
+                        .ownerName(entity.getOwnerName())
                         .description(entity.getDescription())
                         .build())
                 .collect(Collectors.toList());
@@ -35,7 +35,7 @@ public class SkateBoardServiceImpl implements SkateBoardService {
 
         of(skateBoard)
                 .map(board -> SkateBoardEntity.builder()
-                        .name(skateBoard.getOwnerName())
+                        .ownerName(skateBoard.getOwnerName())
                         .description(skateBoard.getDescription())
                         .build())
                 .ifPresent(skateBoardRepository::save);
@@ -43,13 +43,19 @@ public class SkateBoardServiceImpl implements SkateBoardService {
     }
 
     @Override
-    public void updateSkateBoardAvailability(String name, boolean availability) {
+    public void updateSkateBoardAvailability(long id, SkateBoard skateBoard) {
 
-        skateBoardRepository.findAllByName(name)
-                .findFirst()
-                .ifPresent(entity -> {
-                    entity.setAvailable(availability);
-                    skateBoardRepository.save(entity);
-                });
+        skateBoardRepository.findById(id)
+                .map(entity -> {
+                    entity.setOwnerName(skateBoard.getOwnerName());
+                    entity.setDescription(skateBoard.getDescription());
+                    entity.setAvailable(skateBoard.isAvailable());
+                    entity.setBrand(skateBoard.getBrand());
+                    entity.setLength(skateBoard.getLength());
+                    entity.setLocation(skateBoard.getLocation());
+                    entity.setWeight(skateBoard.getWeight());
+                    return entity;
+                })
+                .ifPresent(skateBoardRepository::save);
     }
 }

@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -20,5 +19,6 @@ public class SkateBoard {
     private BigDecimal weight;
     private BigDecimal length;
     private String location;
-    private LocalDateTime timestamp;
+    private String timeStamp;
+    private boolean available;
 }

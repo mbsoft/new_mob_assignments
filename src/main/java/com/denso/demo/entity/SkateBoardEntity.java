@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -14,9 +16,15 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Entity
 public class SkateBoardEntity {
+
     @Id
-    private String id;
-    private String name;
+    private long id;
+    private String ownerName;
     private String description;
+    private String brand;
+    private BigDecimal weight;
+    private BigDecimal length;
+    private String location;
+    private LocalDateTime timestamp;
     private boolean available;
 }

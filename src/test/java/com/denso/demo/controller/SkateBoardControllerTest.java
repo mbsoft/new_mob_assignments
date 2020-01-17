@@ -8,6 +8,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,7 +38,7 @@ public class SkateBoardControllerTest {
                 .get("/skate-board")
                 .then()
                 .statusCode(200)
-                .body(is("[{\"ownerName\":\"ownerName\",\"description\":\"description\",\"brand\":null,\"weight\":null,\"length\":null,\"location\":null,\"timestamp\":null}]"));
+                .body(is("[{\"ownerName\":\"ownerName\",\"description\":\"description\",\"brand\":null,\"weight\":null,\"length\":null,\"location\":null,\"timeStamp\":null,\"available\":false}]"));
     }
 
     @Test
@@ -56,22 +58,29 @@ public class SkateBoardControllerTest {
         verify(skateBoardService).addSkateBoard(skateBoard);
     }
 
-
     @Test
     public void updateSkateBoardAvailability_givenAPICallToPutSkateBoard_return200AsStatusCode() {
 
-        SkateBoard skateBoard = SkateBoard.builder().ownerName("ownerName").description("description").build();
+        SkateBoard skateBoard = SkateBoard.builder()
+                .ownerName("ownerName")
+                .description("description")
+                .brand("brand")
+                .length(new BigDecimal(12.00))
+                .location("Detroit")
+                .weight(new BigDecimal(12.00))
+                .timeStamp(LocalDateTime.now().toString())
+                .build();
 
         given()
                 .standaloneSetup(new SkateBoardController(skateBoardService))
                 .header(CONTENT_TYPE, "application/json")
-                .queryParam("available", true)
                 .body(new Gson().toJson(skateBoard))
                 .when()
-                .put("/skate-board/ownerName")
+                .put("/skate-board/1")
                 .then()
                 .statusCode(200);
 
-        verify(skateBoardService).updateSkateBoardAvailability("ownerName", true);
+
+        verify(skateBoardService).updateSkateBoardAvailability(1l, skateBoard);
     }
 }

@@ -10,5 +10,5 @@ public interface SkateBoardService {
 
     void addSkateBoard(SkateBoard skateBoard);
 
-    void updateSkateBoardAvailability(String name, boolean availability);
+    void updateSkateBoardAvailability(long id, SkateBoard skateBoard);
 }

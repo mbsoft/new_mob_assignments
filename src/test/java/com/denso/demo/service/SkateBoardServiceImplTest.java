@@ -11,7 +11,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Optional;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -40,7 +40,7 @@ public class SkateBoardServiceImplTest {
     @Test
     public void getAllAvailableSkateBoards_givenAvailableSkateBoardList_shouldReturnSkateBoard() {
 
-        when(skateBoardRepository.findAll()).thenReturn(singletonList(SkateBoardEntity.builder().name("ownerName").description("description").available(true).build()));
+        when(skateBoardRepository.findAll()).thenReturn(singletonList(SkateBoardEntity.builder().ownerName("ownerName").description("description").available(true).build()));
 
         List<SkateBoard> actual = classUnderTest.getAllAvailableSkateBoards();
 
@@ -51,8 +51,8 @@ public class SkateBoardServiceImplTest {
     @Test
     public void getAllAvailableSkateBoards_givenNonEmptyListWithUnavailableSkateBoardEntities_shouldReturnEmptyList() {
 
-        when(skateBoardRepository.findAll()).thenReturn(asList(SkateBoardEntity.builder().name("ownerName").description("description").available(false).build(),
-                SkateBoardEntity.builder().name("ownerName").description("description").available(true).build()));
+        when(skateBoardRepository.findAll()).thenReturn(asList(SkateBoardEntity.builder().ownerName("ownerName").description("description").available(false).build(),
+                SkateBoardEntity.builder().ownerName("ownerName").description("description").available(true).build()));
 
         List<SkateBoard> actual = classUnderTest.getAllAvailableSkateBoards();
 
@@ -65,7 +65,7 @@ public class SkateBoardServiceImplTest {
 
         classUnderTest.addSkateBoard(SkateBoard.builder().ownerName("ownerName").description("description").build());
 
-        verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().name("ownerName").description("description").build()));
+        verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().ownerName("ownerName").description("description").build()));
     }
 
     @Test
@@ -73,15 +73,15 @@ public class SkateBoardServiceImplTest {
 
         classUnderTest.addSkateBoard(SkateBoard.builder().ownerName("ownerName").description("description").build());
 
-        verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().name("ownerName").description("description").build()));
+        verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().ownerName("ownerName").description("description").build()));
     }
 
     @Test
     public void updateSkateBoardAvailability_givenNoSkateBoardsOnOwnerName_doNotCallRepositoryUpdate() {
 
-        when(skateBoardRepository.findAllByName("name")).thenReturn(Stream.of());
+        when(skateBoardRepository.findById(1l)).thenReturn(Optional.empty());
 
-        classUnderTest.updateSkateBoardAvailability("name", true);
+        classUnderTest.updateSkateBoardAvailability(1l, SkateBoard.builder().ownerName("ownerName").description("description").build());
 
         verify(skateBoardRepository, times(0)).save(any());
     }
@@ -89,10 +89,10 @@ public class SkateBoardServiceImplTest {
     @Test
     public void updateSkateBoardAvailability_givenSkateBoardOwnerName_callRepositoryUpdate() {
 
-        when(skateBoardRepository.findAllByName("name")).thenReturn(Stream.of(SkateBoardEntity.builder().name("ownerName").description("description").build()));
+        when(skateBoardRepository.findById(1l)).thenReturn(Optional.of(SkateBoardEntity.builder().ownerName("ownerName").description("description").build()));
 
-        classUnderTest.updateSkateBoardAvailability("name", true);
+        classUnderTest.updateSkateBoardAvailability(1l, SkateBoard.builder().ownerName("ownerName1").description("description1").available(true).build());
 
-        verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().name("ownerName").description("description").available(true).build()));
+        verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().ownerName("ownerName1").description("description1").available(true).build()));
     }
 }

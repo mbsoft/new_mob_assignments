@@ -26,9 +26,9 @@ public class SkateBoardController {
         skateBoardService.addSkateBoard(skateBoard);
     }
 
-    @PutMapping("/{ownerName}")
-    public void updateSkateBoardAvailability(@PathVariable String ownerName, @RequestParam boolean available) {
+    @PutMapping("/{boardId}")
+    public void updateSkateBoardAvailability(@PathVariable long boardId, @RequestBody SkateBoard skateBoard) {
 
-        skateBoardService.updateSkateBoardAvailability(ownerName, available);
+        skateBoardService.updateSkateBoardAvailability(boardId, skateBoard);
     }
 }
