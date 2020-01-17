@@ -13,7 +13,9 @@ import java.util.List;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkateBoardControllerTest {
@@ -38,16 +40,19 @@ public class SkateBoardControllerTest {
     }
 
     @Test
-    public void getSkateBoards_givenAPICallToPostSkateBoard_return200AsStatusCode() {
+    public void addSkateBoard_givenAPICallToPostSkateBoard_return200AsStatusCode() {
 
         SkateBoard skateBoard = SkateBoard.builder().name("name").description("description").build();
 
         given()
                 .standaloneSetup(new SkateBoardController(skateBoardService))
+                .header(CONTENT_TYPE, "application/json")
                 .body(new Gson().toJson(skateBoard))
                 .when()
                 .post("/skate-board")
                 .then()
                 .statusCode(200);
+
+        verify(skateBoardService).addSkateBoard(skateBoard);
     }
 }
