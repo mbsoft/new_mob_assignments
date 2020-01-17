@@ -81,6 +81,20 @@ public class SkateBoardControllerTest {
                 .statusCode(200);
 
 
-        verify(skateBoardService).updateSkateBoardAvailability(1l, skateBoard);
+        verify(skateBoardService).updateSkateBoard(1l, skateBoard);
+    }
+
+    @Test
+    public void deleteSkateBoards_givenAPICallToDeleteSkateBoard_return200AsStatusCode() {
+
+
+        given()
+                .standaloneSetup(new SkateBoardController(skateBoardService))
+                .when()
+                .delete("/skate-board/1")
+                .then()
+                .statusCode(200);
+
+        verify(skateBoardService).deleteSkateBoard(1l);
     }
 }

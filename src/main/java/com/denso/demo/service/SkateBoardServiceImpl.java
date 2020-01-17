@@ -43,7 +43,7 @@ public class SkateBoardServiceImpl implements SkateBoardService {
     }
 
     @Override
-    public void updateSkateBoardAvailability(long id, SkateBoard skateBoard) {
+    public void updateSkateBoard(long id, SkateBoard skateBoard) {
 
         skateBoardRepository.findById(id)
                 .map(entity -> {

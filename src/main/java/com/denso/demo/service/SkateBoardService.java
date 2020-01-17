@@ -10,7 +10,7 @@ public interface SkateBoardService {
 
     void addSkateBoard(SkateBoard skateBoard);
 
-    void updateSkateBoardAvailability(long id, SkateBoard skateBoard);
+    void updateSkateBoard(long id, SkateBoard skateBoard);
 
     void deleteSkateBoard(long skateBoardId);
 }

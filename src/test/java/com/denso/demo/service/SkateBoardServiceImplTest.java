@@ -77,21 +77,21 @@ public class SkateBoardServiceImplTest {
     }
 
     @Test
-    public void updateSkateBoardAvailability_givenNoSkateBoardsOnOwnerName_doNotCallRepositoryUpdate() {
+    public void updateSkateBoard_givenNoSkateBoardsOnOwnerName_doNotCallRepositoryUpdate() {
 
         when(skateBoardRepository.findById(1l)).thenReturn(Optional.empty());
 
-        classUnderTest.updateSkateBoardAvailability(1l, SkateBoard.builder().ownerName("ownerName").description("description").build());
+        classUnderTest.updateSkateBoard(1l, SkateBoard.builder().ownerName("ownerName").description("description").build());
 
         verify(skateBoardRepository, times(0)).save(any());
     }
 
     @Test
-    public void updateSkateBoardAvailability_givenSkateBoardOwnerName_callRepositoryUpdate() {
+    public void updateSkateBoard_givenSkateBoardOwnerName_callRepositoryUpdate() {
 
         when(skateBoardRepository.findById(1l)).thenReturn(Optional.of(SkateBoardEntity.builder().ownerName("ownerName").description("description").build()));
 
-        classUnderTest.updateSkateBoardAvailability(1l, SkateBoard.builder().ownerName("ownerName1").description("description1").available(true).build());
+        classUnderTest.updateSkateBoard(1l, SkateBoard.builder().ownerName("ownerName1").description("description1").available(true).build());
 
         verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().ownerName("ownerName1").description("description1").available(true).build()));
     }

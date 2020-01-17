@@ -27,8 +27,14 @@ public class SkateBoardController {
     }
 
     @PutMapping("/{boardId}")
-    public void updateSkateBoardAvailability(@PathVariable long boardId, @RequestBody SkateBoard skateBoard) {
+    public void updateSkateBoard(@PathVariable long boardId, @RequestBody SkateBoard skateBoard) {
 
-        skateBoardService.updateSkateBoardAvailability(boardId, skateBoard);
+        skateBoardService.updateSkateBoard(boardId, skateBoard);
+    }
+
+    @DeleteMapping("/{boardId}")
+    public void deleteSkateBoard(@PathVariable long boardId) {
+
+        skateBoardService.deleteSkateBoard(boardId);
     }
 }
