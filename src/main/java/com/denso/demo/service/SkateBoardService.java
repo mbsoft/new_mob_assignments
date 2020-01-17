@@ -9,4 +9,6 @@ public interface SkateBoardService {
     List<SkateBoard> getAllAvailableSkateBoards();
 
     void addSkateBoard(SkateBoard skateBoard);
+
+    void updateSkateBoardAvailability(String name, boolean availability);
 }

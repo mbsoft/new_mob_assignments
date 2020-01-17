@@ -26,7 +26,7 @@ public class SkateBoardControllerTest {
     @Test
     public void getSkateBoards_givenAPICallToGetSkateBoard_return200AsStatusCode() {
 
-        List<SkateBoard> skateBoards = Arrays.asList(SkateBoard.builder().name("name").description("description").build());
+        List<SkateBoard> skateBoards = Arrays.asList(SkateBoard.builder().ownerName("ownerName").description("description").build());
 
         when(skateBoardService.getAllAvailableSkateBoards()).thenReturn(skateBoards);
 
@@ -36,13 +36,13 @@ public class SkateBoardControllerTest {
                 .get("/skate-board")
                 .then()
                 .statusCode(200)
-                .body(is("[{\"name\":\"name\",\"description\":\"description\"}]"));
+                .body(is("[{\"ownerName\":\"ownerName\",\"description\":\"description\"}]"));
     }
 
     @Test
     public void addSkateBoard_givenAPICallToPostSkateBoard_return200AsStatusCode() {
 
-        SkateBoard skateBoard = SkateBoard.builder().name("name").description("description").build();
+        SkateBoard skateBoard = SkateBoard.builder().ownerName("ownerName").description("description").build();
 
         given()
                 .standaloneSetup(new SkateBoardController(skateBoardService))

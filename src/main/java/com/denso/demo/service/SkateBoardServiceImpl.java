@@ -24,7 +24,7 @@ public class SkateBoardServiceImpl implements SkateBoardService {
                 .stream()
                 .filter(SkateBoardEntity::isAvailable)
                 .map(entity -> SkateBoard.builder()
-                        .name(entity.getName())
+                        .ownerName(entity.getName())
                         .description(entity.getDescription())
                         .build())
                 .collect(Collectors.toList());
@@ -35,10 +35,21 @@ public class SkateBoardServiceImpl implements SkateBoardService {
 
         of(skateBoard)
                 .map(board -> SkateBoardEntity.builder()
-                        .name(skateBoard.getName())
+                        .name(skateBoard.getOwnerName())
                         .description(skateBoard.getDescription())
                         .build())
                 .ifPresent(skateBoardRepository::save);
 
+    }
+
+    @Override
+    public void updateSkateBoardAvailability(String name, boolean availability) {
+
+        skateBoardRepository.findAllByName(name)
+                .findFirst()
+                .ifPresent(entity -> {
+                    entity.setAvailable(availability);
+                    skateBoardRepository.save(entity);
+                });
     }
 }
