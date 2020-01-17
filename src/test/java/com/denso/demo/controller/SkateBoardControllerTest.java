@@ -1,13 +1,19 @@
 package com.denso.demo.controller;
 
+import com.denso.demo.domain.SkateBoard;
 import com.denso.demo.service.SkateBoardService;
+import com.google.gson.Gson;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
-import static org.mockito.Mockito.verify;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkateBoardControllerTest {
@@ -16,15 +22,32 @@ public class SkateBoardControllerTest {
     private SkateBoardService skateBoardService;
 
     @Test
-    public void getSkateBoards_givenAPIPath_return200AsStatusCode() {
+    public void getSkateBoards_givenAPICallToGetSkateBoard_return200AsStatusCode() {
+
+        List<SkateBoard> skateBoards = Arrays.asList(SkateBoard.builder().name("name").description("description").build());
+
+        when(skateBoardService.getAllAvailableSkateBoards()).thenReturn(skateBoards);
 
         given()
                 .standaloneSetup(new SkateBoardController(skateBoardService))
                 .when()
                 .get("/skate-board")
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .body(is("[{\"name\":\"name\",\"description\":\"description\"}]"));
+    }
 
-        verify(skateBoardService).getAllAvailableSkateBoards();
+    @Test
+    public void getSkateBoards_givenAPICallToPostSkateBoard_return200AsStatusCode() {
+
+        SkateBoard skateBoard = SkateBoard.builder().name("name").description("description").build();
+
+        given()
+                .standaloneSetup(new SkateBoardController(skateBoardService))
+                .body(new Gson().toJson(skateBoard))
+                .when()
+                .post("/skate-board")
+                .then()
+                .statusCode(200);
     }
 }
