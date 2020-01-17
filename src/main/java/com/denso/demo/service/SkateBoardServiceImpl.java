@@ -58,4 +58,10 @@ public class SkateBoardServiceImpl implements SkateBoardService {
                 })
                 .ifPresent(skateBoardRepository::save);
     }
+
+    @Override
+    public void deleteSkateBoard(long skateBoardId) {
+
+        skateBoardRepository.deleteById(skateBoardId);
+    }
 }

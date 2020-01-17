@@ -95,4 +95,13 @@ public class SkateBoardServiceImplTest {
 
         verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().ownerName("ownerName1").description("description1").available(true).build()));
     }
+
+    @Test
+    public void deleteSkateBoard_givenSkateBoardId_callDeleteSkateBoard() {
+
+        classUnderTest.deleteSkateBoard(1l);
+
+        verify(skateBoardRepository).deleteById(1l);
+
+    }
 }
