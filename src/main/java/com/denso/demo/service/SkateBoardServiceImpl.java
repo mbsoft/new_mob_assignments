@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +26,7 @@ public class SkateBoardServiceImpl implements SkateBoardService {
                 .map(entity -> SkateBoard.builder()
                         .ownerName(entity.getOwnerName())
                         .description(entity.getDescription())
+                        .id(entity.getId())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -33,10 +34,15 @@ public class SkateBoardServiceImpl implements SkateBoardService {
     @Override
     public void addSkateBoard(SkateBoard skateBoard) {
 
-        of(skateBoard)
+        ofNullable(skateBoard)
                 .map(board -> SkateBoardEntity.builder()
                         .ownerName(skateBoard.getOwnerName())
                         .description(skateBoard.getDescription())
+                        .available(skateBoard.isAvailable())
+                        .brand(skateBoard.getBrand())
+                        .length(skateBoard.getLength())
+                        .weight(skateBoard.getWeight())
+                        .location(skateBoard.getLocation())
                         .build())
                 .ifPresent(skateBoardRepository::save);
 
@@ -63,5 +69,20 @@ public class SkateBoardServiceImpl implements SkateBoardService {
     public void deleteSkateBoard(long skateBoardId) {
 
         skateBoardRepository.deleteById(skateBoardId);
+    }
+
+    @Override
+    public SkateBoard getSkateBoard(long skateBoardId) {
+        return skateBoardRepository.findById(skateBoardId)
+                .map(skateBoard -> SkateBoard.builder()
+                        .ownerName(skateBoard.getOwnerName())
+                        .description(skateBoard.getDescription())
+                        .available(skateBoard.isAvailable())
+                        .brand(skateBoard.getBrand())
+                        .length(skateBoard.getLength())
+                        .weight(skateBoard.getWeight())
+                        .location(skateBoard.getLocation())
+                        .build())
+                .orElse(null);
     }
 }

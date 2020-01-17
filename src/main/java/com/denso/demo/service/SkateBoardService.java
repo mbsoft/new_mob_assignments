@@ -13,4 +13,6 @@ public interface SkateBoardService {
     void updateSkateBoard(long id, SkateBoard skateBoard);
 
     void deleteSkateBoard(long skateBoardId);
+
+    SkateBoard getSkateBoard(long skateBoardId);
 }

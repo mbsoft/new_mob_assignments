@@ -13,6 +13,7 @@ import java.util.List;
 @RequestMapping("/skate-board")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin(origins = "http://localhost:3000")
 public class SkateBoardController {
 
     private final SkateBoardService skateBoardService;

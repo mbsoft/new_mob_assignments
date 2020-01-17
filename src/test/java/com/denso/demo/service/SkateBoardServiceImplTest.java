@@ -28,6 +28,26 @@ public class SkateBoardServiceImplTest {
     private SkateBoardRepository skateBoardRepository;
 
     @Test
+    public void getSkateBoard_givenEmptySkateBoard_shouldReturnNull() {
+
+        when(skateBoardRepository.findById(1l)).thenReturn(Optional.empty());
+
+        SkateBoard actual = classUnderTest.getSkateBoard(1l);
+
+        assertThat(actual).isNull();
+    }
+
+    @Test
+    public void getSkateBoard_givenSkateBoardFound_shouldReturnSkateBoard() {
+
+        when(skateBoardRepository.findById(1l)).thenReturn(Optional.of(SkateBoardEntity.builder().build()));
+
+        SkateBoard actual = classUnderTest.getSkateBoard(1l);
+
+        assertThat(actual).isEqualToComparingFieldByField(SkateBoard.builder().build());
+    }
+
+    @Test
     public void getAllAvailableSkateBoards_givenEmptySkateBoardList_shouldReturnEmpty() {
 
         when(skateBoardRepository.findAll()).thenReturn(Lists.emptyList());
@@ -63,17 +83,17 @@ public class SkateBoardServiceImplTest {
     @Test
     public void addSkateBoard_givenNullSkateBoard_doNotCallRepositorySave() {
 
-        classUnderTest.addSkateBoard(SkateBoard.builder().ownerName("ownerName").description("description").build());
+        classUnderTest.addSkateBoard(null);
 
-        verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().ownerName("ownerName").description("description").build()));
+        verify(skateBoardRepository, times(0)).save(any());
     }
 
     @Test
     public void addSkateBoard_givenSkateBoard_callRepositorySave() {
 
-        classUnderTest.addSkateBoard(SkateBoard.builder().ownerName("ownerName").description("description").build());
+        classUnderTest.addSkateBoard(SkateBoard.builder().ownerName("ownerName").description("description").available(true).build());
 
-        verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().ownerName("ownerName").description("description").build()));
+        verify(skateBoardRepository).save(eq(SkateBoardEntity.builder().ownerName("ownerName").description("description").available(true).build()));
     }
 
     @Test

@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class SkateBoard {
 
+    private long id;
     private String ownerName;
     private String description;
     private String brand;
