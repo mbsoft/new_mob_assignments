@@ -3,14 +3,18 @@ info:
   description: Boardgroove server
   version: "1.0.3"
   title: "Boardgroove"
+host: localhost:3200
 basePath: "/api/v1"
 schemes:
   - "http"
+  - "https"
 consumes:
   - "application/json"
 produces:
   - "application/json"
 paths:
+  /swagger:
+    x-swagger-pipe: swagger_raw
   /:
     get:
       tags:
@@ -24,7 +28,7 @@ paths:
         200:
           description: 'success'
           schema:
-            $ref: '#/definitions/ArrayofVersions'
+            $ref: '#/definitions/ArrayOfVersions'
   /ping:
     get:
       tags:
@@ -154,7 +158,7 @@ paths:
           description: "Skateboard to add"
           required: true
           schema:
-            $ref: "#/definition/NewSkateboard"
+            $ref: "#/definitions/Skateboard"
       responses:
         "200":
           description: "skateboard response"
@@ -167,24 +171,16 @@ paths:
 
 definitions:
   Skateboard:
-    type: "object"
-    allOf:
-      - $ref: "#/definitions/NewSkateboard"
-      - required:
+      type: "object"
+      required:
           - "_id"
-        properties:
-          id:
-            type: "integer"
-            format: "int64"
-  NewSkateboard:
-    type: "object"
-    required:
-      - "_id"
-    properties:
-      alias:
-        type: "string"
-      currentAddress:
-        type: "string"
+      properties:
+          _id:
+              type: "string"
+          alias:
+              type: "string"
+          currentAddress:
+              type: "string"
   ErrorModel:
     type: "object"
     required:

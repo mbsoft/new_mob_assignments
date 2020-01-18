@@ -10,7 +10,7 @@ const app = express();
 
 async function run() {
     app.use(express.json({ type: () => true }));
-    const apiDefinition = YAML.load('skateboard-api.yml');
+    const apiDefinition = YAML.load('api/swagger/swagger.yaml');
     const connect = connector(api, apiDefinition);
 
     console.log(summarise(apiDefinition));

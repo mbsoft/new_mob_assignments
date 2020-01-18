@@ -8,13 +8,15 @@
                                                                                                                              
 `````
 
+
+
 In the shared mobility space, there are a number of different types of shared assets - cars, scooters, ebikes. For this project, we want to create a starting point for an API that will allow individual skateboarders to share their boards. 
 
 - **Project Name:** Boardgroove REST API
 - **Project Goal:** Create/define an API that will help skateboarders to share their 'boards'
-- **Technology:** node.js, express, mocha, chai, mongo-mock for db
+- **Technology:** node.js, express, swagger, mocha, chai, mongo-mock for db
 - **Deliverables:**  
-
+ 
 **Task:** Build the REST API that might support the stories described above. Write unit tests for each component.
 
 **Requirements:**
@@ -51,11 +53,19 @@ some examples:
 ##Install
 ```$xslt
 npm install
+npm install -g swagger ' to user swagger UI interface
 ```
 ## Run
 ```$xslt
 npm start
 ```
+## Interactive Test Using Swagger UI
+```$xslt
+swagger project edit
+
+```
+![Swagger UI](./images/swagger_ui.png "Title")
+
 ##Minimum unit test and coverage results
 
 ```javascript

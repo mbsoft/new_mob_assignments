@@ -9,11 +9,8 @@
     "test": "nyc --all --reporter=text mocha --recursive"
   },
   "dependencies": {
-    "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
     "mongomock": "^0.1.2",
     "morgan": "~1.9.1",
     "swagger-parser": "^8.0.4",
@@ -24,7 +21,6 @@
     "eslint-plugin-import": "^2.20.0"
   },
   "devDependencies": {
-    "sinon": "^8.1.0",
     "nyc": "^15.0.0",
     "jshint": "^2.11.0",
     "mocha-jshint": "^2.3.1",

@@ -1,14 +1,8 @@
 
 const mongo = require('../../../data/mongo_mock_db');
 
-const {
-    name,
-    version,
-    description
-} = require('../../../package.json');
-
 const listSkateboards = (req, res) => {
-    var listResults = [];
+    let listResults = [];
     mongo.collection('skateboards').find({isActive:true}).toArray(function(err, skateboards) {
         listResults = skateboards;
     });
