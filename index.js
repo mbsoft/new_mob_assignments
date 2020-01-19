@@ -6,6 +6,7 @@ const { connector, summarise } = require('swagger-routes-express');
 const MongoMock = require('mongomock');
 const api = require('./api');
 const seed_data = require('./data/seed_data');
+const logger = require('./logger');
 const app = express();
 
 async function run() {
@@ -20,17 +21,17 @@ async function run() {
     /* istanbul ignore next */
     if (!process.argv.join(' ').includes('mocha')) {
         const server = app.listen(3200, '0.0.0.0', () => {
-            console.log('Express started listening on 3200');
+            logger.info('Express started listening on 3200');
         });
 
     } else {
-        console.log('Express skipped binding while running test process');
+        logger.info('Express skipped binding while running test process');
     }
 }
 
 /* istanbul ignore next */
 run().catch((error) => {
-    console.log('Error starting...');
+    logger.info('Error starting...');
     process.kill(process.pid, 'SIGINT');
 });
 

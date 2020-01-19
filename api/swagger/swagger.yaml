@@ -1,49 +1,49 @@
 swagger: "2.0"
 info:
-  description: Boardgroove server
-  version: "1.0.3"
-  title: "Boardgroove"
+    description: Boardgroove server
+    version: "1.0.3"
+    title: "Boardgroove"
 host: localhost:3200
 basePath: "/api/v1"
 schemes:
-  - "http"
-  - "https"
+    - "http"
+    - "https"
 consumes:
-  - "application/json"
+    - "application/json"
 produces:
-  - "application/json"
+    - "application/json"
 paths:
-  /swagger:
-    x-swagger-pipe: swagger_raw
-  /:
-    get:
-      tags:
-        - "root"
-      summary: 'Get API Version details'
-      description: 'Returns a list of the available API versions'
-      operationId: 'versions'
-      produces:
-        - 'application/json'
-      responses:
-        200:
-          description: 'success'
-          schema:
-            $ref: '#/definitions/ArrayOfVersions'
-  /ping:
-    get:
-      tags:
-        - "root"
-      summary: "Get da server uppity details..."
-      operationId: "ping"
-      produces:
-        - "application/json"
-      responses:
-        200:
-          description: "success"
-          schema:
-            $ref: "#/definitions/ServerInfo"
+    /swagger:
+        x-swagger-pipe: swagger_raw
+    /:
+        get:
+            tags:
+                - "root"
+            summary: 'Get API Version details'
+            description: 'Returns a list of the available API versions'
+            operationId: 'versions'
+            produces:
+                - 'application/json'
+            responses:
+                200:
+                    description: 'success'
+                    schema:
+                        $ref: '#/definitions/ArrayOfVersions'
+    /ping:
+        get:
+            tags:
+                - "root"
+            summary: "Get da server uppity details..."
+            operationId: "ping"
+            produces:
+                - "application/json"
+            responses:
+                200:
+                    description: "success"
+                    schema:
+                        $ref: "#/definitions/ServerInfo"
 
-  /skateboard/{boardId}:
+    /skateboard/{boardId}:
       get:
         tags:
           - "skateboard"
@@ -85,133 +85,242 @@ paths:
           400:
             description: "Invalid skateboard ID"
 
-  /skateboard:
-    get:
-      description: "Returns all skateboard in the system"
-      operationId: "v1/skateboard/listSkateboards"
-      produces:
-        - "application/json"
-      parameters:
-        -
-          name: "tags"
-          in: "query"
-          description: "tags to filter by"
-          required: false
-          type: "array"
-          items:
-            type: "string"
-          collectionFormat: "csv"
-        -
-          name: "limit"
-          in: "query"
-          description: "maximum number of results to return"
-          required: false
-          type: "integer"
-          format: "int32"
-      responses:
-        "200":
-          description: "skateboard response"
-          schema:
-            $ref: "#/definitions/ServerInfo"
-        default:
-          description: "unexpected error"
-          schema:
-            $ref: "#/definitions/ErrorModel"
-    put:
-      tags:
-        - "skateboard"
-      summary: "Update an existing skateboard"
-      description: ""
-      operationId: "v1/skateboard/updateSkateboard"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        - in: "body"
-          name: "body"
-          description: "Skateboard object that needs to be added to the store"
-          required: true
-          schema:
-            $ref: "#/definitions/Skateboard"
-      responses:
-        400:
-          description: "Invalid ID supplied"
-        404:
-          description: "Skateboard not found"
-        405:
-          description: "Validation exception"
+
+    /skateboard:
+        get:
+            tags:
+                - "skateboard"
+            description: "Returns all skateboard in the system"
+            operationId: "v1/skateboard/listSkateboards"
+            produces:
+                - "application/json"
+            parameters:
+                -
+                    name: "tags"
+                    in: "query"
+                    description: "tags to filter by"
+                    required: false
+                    type: "array"
+                    items:
+                        type: "string"
+                    collectionFormat: "csv"
+                -
+                    name: "limit"
+                    in: "query"
+                    description: "maximum number of results to return"
+                    required: false
+                    type: "integer"
+                    format: "int32"
+            responses:
+                "200":
+                    description: "skateboard response"
+                    schema:
+                        $ref: "#/definitions/Skateboards"
+                default:
+                    description: "unexpected error"
+                    schema:
+                        $ref: "#/definitions/ErrorModel"
+        put:
+            tags:
+                - "skateboard"
+            summary: "Update an existing skateboard"
+            description: ""
+            operationId: "v1/skateboard/updateSkateboard"
+            consumes:
+                - "application/json"
+            produces:
+                - "application/json"
+            parameters:
+                -
+                    in: "body"
+                    name: "body"
+                    description: "Skateboard object that needs to be added to the store"
+                    required: true
+                    schema:
+                        $ref: "#/definitions/Skateboard"
+            responses:
+                400:
+                    description: "Invalid ID supplied"
+                404:
+                    description: "Skateboard not found"
+                405:
+                    description: "Validation exception"
 
 
 
-    post:
-      description: "Add a skateboard to the system"
-      operationId: "v1/skateboard/addSkateboard"
-      consumes:
-        - "application/json"
-      produces:
-        - "application/json"
-      parameters:
-        -
-          name: "body"
-          in: "body"
-          description: "Skateboard to add"
-          required: true
-          schema:
-            $ref: "#/definitions/Skateboard"
-      responses:
-        "200":
-          description: "skateboard response"
-          schema:
-            $ref: "#/definitions/Skateboard"
-        default:
-          description: "unexpected error"
-          schema:
-            $ref: "#/definitions/ErrorModel"
+        post:
+            description: "Add a skateboard to the system"
+            operationId: "v1/skateboard/addSkateboard"
+            consumes:
+                - "application/json"
+            produces:
+                - "application/json"
+            parameters:
+                -
+                    name: "body"
+                    in: "body"
+                    description: "Skateboard to add"
+                    required: true
+                    schema:
+                        $ref: "#/definitions/Skateboard"
+            responses:
+                "200":
+                    description: "skateboard response"
+                    schema:
+                        $ref: "#/definitions/Skateboard"
+                default:
+                    description: "unexpected error"
+                    schema:
+                        $ref: "#/definitions/ErrorModel"
 
+    /user:
+        get:
+            tags:
+                - "user"
+            description: "Returns all users in the system"
+            operationId: "v1/user/listUsers"
+            produces:
+                - "application/json"
+            parameters:
+                -
+                    name: "tags"
+                    in: "query"
+                    description: "tags to filter by"
+                    required: false
+                    type: "array"
+                    items:
+                        type: "string"
+                    collectionFormat: "csv"
+                -
+                    name: "limit"
+                    in: "query"
+                    description: "maximum number of results to return"
+                    required: false
+                    type: "integer"
+                    format: "int32"
+            responses:
+                "200":
+                    description: "user response"
+                    schema:
+                        $ref: "#/definitions/Users"
+                default:
+                    description: "Unexpected error"
+                    schema:
+                        $ref: "#/definitions/ErrorModel"
 definitions:
-  Skateboard:
-      type: "object"
-      required:
-          - "_id"
-      properties:
-          _id:
-              type: "string"
-          alias:
-              type: "string"
-          currentAddress:
-              type: "string"
-  ErrorModel:
-    type: "object"
-    required:
-      - "code"
-      - "message"
-    properties:
-      code:
-        type: "integer"
-        format: "int32"
-      message:
-        type: "string"
-  ServerInfo:
-    type: "object"
-    properties:
-      name:
-        type: "string"
-      description:
-        type: "string"
-      version:
-        type: "string"
-      uptime:
-        type: "number"
-  APIVersion:
-    type: 'object'
-    properties:
-      version:
-        type: 'integer'
-        format: 'int64'
-      path:
-        type: 'string'
-  ArrayOfVersions:
-    type: 'array'
-    items:
-      $ref: '#/definitions/APIVersion'
+    Skateboard:
+        type: "object"
+        required:
+            - "_id"
+        properties:
+            _id:
+                type: "string"
+            index:
+                type: "integer"
+                format: "int32"
+            guid:
+                type: "string"
+            isActive:
+                type: "boolean"
+            picture:
+                type: "string"
+            age:
+                type: "integer"
+                format: "int32"
+            color:
+                type: "string"
+            alias:
+                type: "string"
+            currentAddress:
+                type: "string"
+            registerd:
+                type: "string"
+            latitude:
+                type: "number"
+                format: "double"
+            longitude:
+                type: "number"
+                format: "double"
+            tags:
+                type: "array"
+                items:
+                    type: "string"
+    Skateboards:
+        type: "array"
+        items:
+            $ref: '#/definitions/Skateboard'
+    User:
+        type: "object"
+        required:
+            - "_id"
+        properties:
+            _id:
+                type: "string"
+            index:
+                type: "integer"
+                format: "int32"
+            guid:
+                type: "string"
+            isRegistered:
+                type: "string"
+            balance:
+                type: "number"
+                format: "float"
+            picture:
+                type: "string"
+            age:
+                type: "integer"
+                format: "int32"
+            name:
+                type: "string"
+            email:
+                type: "string"
+            phone:
+                type: "string"
+            address:
+                type: "string"
+            registered:
+                type: "string"
+            tags:
+                type: "array"
+                items:
+                    type: "string"
+    Users:
+        type: "array"
+        items:
+            $ref: '#/definitions/User'
+
+    ErrorModel:
+        type: "object"
+        required:
+            - "code"
+            - "message"
+        properties:
+            code:
+                type: "integer"
+                format: "int32"
+            message:
+                type: "string"
+    ServerInfo:
+        type: "object"
+        properties:
+            name:
+                type: "string"
+            description:
+                type: "string"
+            version:
+                type: "string"
+            uptime:
+                type: "number"
+    APIVersion:
+        type: 'object'
+        properties:
+            version:
+                type: 'integer'
+                format: 'int64'
+            path:
+                type: 'string'
+    ArrayOfVersions:
+        type: 'array'
+        items:
+            $ref: '#/definitions/APIVersion'

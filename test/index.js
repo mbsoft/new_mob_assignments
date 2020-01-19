@@ -160,6 +160,26 @@ describe('UPDATE a skateboard', () => {
 
 });
 
+describe('GET all users', () => {
+    before(() => {
+
+    });
+
+    it('should return all user records', (done) => {
+        request(app)
+            .get('/api/v1/user')
+            .end((err, res) => {
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                done();
+            });
+
+    });
+    after(() => {
+
+    });
+});
+
 describe('GET api versions', () => {
     before(() => {
 
