@@ -27,14 +27,12 @@ public class SkateBoardServiceImpl implements SkateBoardService {
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public void addSkateBoard(SkateBoard skateBoard) {
 
         ofNullable(skateBoard)
                 .map(this::buildEntity)
                 .ifPresent(skateBoardRepository::save);
-
     }
 
     @Override
