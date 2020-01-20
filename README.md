@@ -46,19 +46,30 @@ some examples:
   * **Delete skateboard**
   
   
- ....
 
-1. Describe your solution in a README and how to run it. Ensure that you clearly state assumptions that you made.
+**Submission Details:**
 
+Project contains Spring boot APP serving APIs acting on resource skate boards.
 
-**Guidelines**
+    APIs:
+        GET /skate-board
+            Return all skate boards
+        PUT /skate-board
+            Return skate board details based on ID
+        GET /skate-board/:id
+            Return selected skate board based on ID
+        PUT /skate-board/:id
+            Update the selected skate board based on ID
+        DELETE /skate-board/:id
+            Delete the selected skate board based on ID
+            
+REACT APP displaying dash board with all the features available on APIs
 
-Please commit early and often and with good commit messages. This will allow us to see how you've approached the problem. Don't worry about changing things around often.
+![Image description](React%20app.png)
 
-Be prepared to discuss some of your approaches and design decisions.
- 
-Please ask any questions if something is unclear
+1. Run ./gradlew clean build
+2. java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
+3. cd skateboard-app
+4. yarn start
 
-**What is this?**
-
-This repo contains the job assignment for potential Backend engineers in DENSO's New Mobility team.
+![Image description](Test%20Results.png)
