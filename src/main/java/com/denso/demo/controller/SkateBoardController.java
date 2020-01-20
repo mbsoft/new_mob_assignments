@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.ACCEPTED;
+
 @RestController
 @RequestMapping("/skate-board")
 @RequiredArgsConstructor
@@ -26,6 +28,7 @@ public class SkateBoardController {
     }
 
     @PostMapping
+    @ResponseStatus(ACCEPTED)
     public void addSkateBoard(@RequestBody SkateBoard skateBoard) {
 
         skateBoardService.addSkateBoard(skateBoard);
@@ -33,6 +36,7 @@ public class SkateBoardController {
     }
 
     @PutMapping("/{boardId}")
+    @ResponseStatus(ACCEPTED)
     public void updateSkateBoard(@PathVariable long boardId, @RequestBody SkateBoard skateBoard) {
 
         skateBoardService.updateSkateBoard(boardId, skateBoard);
@@ -47,5 +51,11 @@ public class SkateBoardController {
 
         log.info("Skate board with id {} has been delete", boardId);
 
+    }
+
+    @GetMapping("/{boardId}")
+    public SkateBoard getSkateBoard(@PathVariable long boardId) {
+
+        return skateBoardService.getSkateBoard(boardId);
     }
 }

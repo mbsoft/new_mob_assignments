@@ -23,27 +23,16 @@ public class SkateBoardServiceImpl implements SkateBoardService {
         return skateBoardRepository.findAll()
                 .stream()
                 .filter(SkateBoardEntity::isAvailable)
-                .map(entity -> SkateBoard.builder()
-                        .ownerName(entity.getOwnerName())
-                        .description(entity.getDescription())
-                        .id(entity.getId())
-                        .build())
+                .map(this::buildSkateBoard)
                 .collect(Collectors.toList());
     }
+
 
     @Override
     public void addSkateBoard(SkateBoard skateBoard) {
 
         ofNullable(skateBoard)
-                .map(board -> SkateBoardEntity.builder()
-                        .ownerName(skateBoard.getOwnerName())
-                        .description(skateBoard.getDescription())
-                        .available(skateBoard.isAvailable())
-                        .brand(skateBoard.getBrand())
-                        .length(skateBoard.getLength())
-                        .weight(skateBoard.getWeight())
-                        .location(skateBoard.getLocation())
-                        .build())
+                .map(this::buildEntity)
                 .ifPresent(skateBoardRepository::save);
 
     }
@@ -74,15 +63,34 @@ public class SkateBoardServiceImpl implements SkateBoardService {
     @Override
     public SkateBoard getSkateBoard(long skateBoardId) {
         return skateBoardRepository.findById(skateBoardId)
-                .map(skateBoard -> SkateBoard.builder()
-                        .ownerName(skateBoard.getOwnerName())
-                        .description(skateBoard.getDescription())
-                        .available(skateBoard.isAvailable())
-                        .brand(skateBoard.getBrand())
-                        .length(skateBoard.getLength())
-                        .weight(skateBoard.getWeight())
-                        .location(skateBoard.getLocation())
-                        .build())
+                .map(this::buildSkateBoard)
                 .orElse(null);
+    }
+
+
+    private SkateBoard buildSkateBoard(SkateBoardEntity boardEntity) {
+        return SkateBoard.builder()
+                .id(boardEntity.getId())
+                .ownerName(boardEntity.getOwnerName())
+                .description(boardEntity.getDescription())
+                .available(boardEntity.isAvailable())
+                .brand(boardEntity.getBrand())
+                .length(boardEntity.getLength())
+                .weight(boardEntity.getWeight())
+                .location(boardEntity.getLocation())
+                .timeStamp(boardEntity.getCreateDateTime().toString())
+                .build();
+    }
+
+    private SkateBoardEntity buildEntity(SkateBoard skateBoard) {
+        return SkateBoardEntity.builder()
+                .ownerName(skateBoard.getOwnerName())
+                .description(skateBoard.getDescription())
+                .available(skateBoard.isAvailable())
+                .brand(skateBoard.getBrand())
+                .length(skateBoard.getLength())
+                .weight(skateBoard.getWeight())
+                .location(skateBoard.getLocation())
+                .build();
     }
 }

@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 
 @Data
@@ -14,6 +15,7 @@ import java.math.BigDecimal;
 public class SkateBoard {
 
     private long id;
+    @NotBlank
     private String ownerName;
     private String description;
     private String brand;

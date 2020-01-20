@@ -30,7 +30,6 @@ public class SkateBoardEntity {
     private BigDecimal weight;
     private BigDecimal length;
     private String location;
-    private LocalDateTime timestamp;
     private boolean available;
     @CreationTimestamp
     private LocalDateTime createDateTime;
