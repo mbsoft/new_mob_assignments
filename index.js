@@ -1,6 +1,5 @@
 
 const express = require('express');
-const SwaggerParser = require('swagger-parser');
 const YAML = require('yamljs');
 const { connector, summarise } = require('swagger-routes-express');
 const MongoMock = require('mongomock');
