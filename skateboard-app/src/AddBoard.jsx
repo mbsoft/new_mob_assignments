@@ -1,20 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-const Details = ({ id }) => {
-
-    const [board, setBoard] = useState({});
-
-    useEffect(() => {
-        fetch('http://localhost:8080/skate-board/' + id)
-            .then(res => res.json())
-            .then((data) => {
-                setBoard(data)
-            })
-            .catch(console.log);
-    }, [id]);
-
+const AddBoard = () => {
     const handleSubmit = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         const data = {
             "ownerName": event.target.ownerName.value,
             "description": event.target.description.value,
@@ -26,7 +14,7 @@ const Details = ({ id }) => {
         }
 
         var options = {
-            method: "PUT",
+            method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json;charset=UTF-8'
@@ -34,11 +22,8 @@ const Details = ({ id }) => {
             body: JSON.stringify(data)
         };
 
-        fetch('http://localhost:8080/skate-board/' + id, options)
+        fetch('http://localhost:8080/skate-board/', options)
             .then(res => res.json())
-            .then((data) => {
-                setBoard(data)
-            })
             .catch(console.log);
     }
 
@@ -46,25 +31,25 @@ const Details = ({ id }) => {
         <div className="form-row">
             <div className="form-group col-md-6">
                 <label htmlFor="ownerName">Owner Name</label>
-                <input type="text" className="form-control" id="ownerName" placeholder={board.ownerName} />
+                <input type="text" className="form-control" id="ownerName" placeholder="Owner Name" />
             </div>
             <div className="form-group col-md-6">
                 <label htmlFor="description">Description</label>
-                <input type="text" className="form-control" id="description" placeholder={board.description} />
+                <input type="text" className="form-control" id="description" placeholder="Description" />
             </div>
         </div>
         <div className="form-group">
             <label htmlFor="brand">Brand</label>
-            <input type="text" className="form-control" id="brand" placeholder={board.brand} />
+            <input type="text" className="form-control" id="brand" placeholder="Brand" />
         </div>
         <div className="form-group">
             <label htmlFor="location">Location</label>
-            <input type="text" className="form-control" id="location" placeholder={board.location} />
+            <input type="text" className="form-control" id="location" placeholder="Location" />
         </div>
         <div className="form-row">
             <div className="form-group col-md-6">
                 <label htmlFor="length">Length</label>
-                <input type="text" className="form-control" id="length" placeholder={board.length} />
+                <input type="text" className="form-control" id="length" placeholder="Length" />
             </div>
             <div className="form-group col-md-4">
                 <label htmlFor="available">Available</label>
@@ -76,10 +61,10 @@ const Details = ({ id }) => {
             </div>
             <div className="form-group col-md-2">
                 <label htmlFor="weight">Weight</label>
-                <input type="text" className="form-control" id="weight" placeholder={board.weight} />
+                <input type="text" className="form-control" id="weight" placeholder="Weight" />
             </div>
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
     </form >
 }
-export default Details;
+export default AddBoard;
