@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    initialization-mode: embedded
+    hikari:
+      jdbcUrl: jdbc:h2:mem:testdb
+      username: sa
+      password:
+      driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+        use_sql_comments: false
+        dialect: org.hibernate.dialect.H2Dialect
+
+spring.h2.console.enabled: true
+spring.h2.console.settings.web-allow-others: true
