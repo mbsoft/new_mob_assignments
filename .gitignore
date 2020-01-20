@@ -7,3 +7,6 @@ eslint.json
 npm-debug.log
 .env
 .DS_Store
+combined.log
+error.log
+package-lock.json
