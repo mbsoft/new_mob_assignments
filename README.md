@@ -69,7 +69,7 @@ REACT APP displaying dash board with all the features available on APIs
 
 1. Run ./gradlew clean build
 2. java -jar build/libs/demo-0.0.1-SNAPSHOT.jar
-3. http:localhost:8080/swagger-ui.html
+3. Swagger url: http:localhost:8080/swagger-ui.html, Swagger Doc Json: http://localhost:8080/v2/api-docs
 3. cd skateboard-app
 4. yarn start
 
