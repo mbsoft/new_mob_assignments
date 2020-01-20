@@ -38,7 +38,7 @@ public class SkateBoardControllerTest {
                 .get("/skate-board")
                 .then()
                 .statusCode(200)
-                .body(is("[{\"ownerName\":\"ownerName\",\"description\":\"description\",\"brand\":null,\"weight\":null,\"length\":null,\"location\":null,\"timeStamp\":null,\"available\":false}]"));
+                .body(is("[{\"id\":0,\"ownerName\":\"ownerName\",\"description\":\"description\",\"brand\":null,\"weight\":null,\"length\":null,\"location\":null,\"timeStamp\":null,\"available\":false}]"));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class SkateBoardControllerTest {
                 .when()
                 .post("/skate-board")
                 .then()
-                .statusCode(200);
+                .statusCode(202);
 
         verify(skateBoardService).addSkateBoard(skateBoard);
     }
@@ -78,7 +78,7 @@ public class SkateBoardControllerTest {
                 .when()
                 .put("/skate-board/1")
                 .then()
-                .statusCode(200);
+                .statusCode(202);
 
 
         verify(skateBoardService).updateSkateBoard(1l, skateBoard);
@@ -96,5 +96,22 @@ public class SkateBoardControllerTest {
                 .statusCode(200);
 
         verify(skateBoardService).deleteSkateBoard(1l);
+    }
+
+
+    @Test
+    public void getSkateBoard_givenIdToFind_return200AsStatusCode() {
+
+
+        when(skateBoardService.getSkateBoard(1l)).thenReturn(SkateBoard.builder().build());
+
+        given()
+                .standaloneSetup(new SkateBoardController(skateBoardService))
+                .when()
+                .get("/skate-board/1")
+                .then()
+                .statusCode(200)
+                .body(is("{\"id\":0,\"ownerName\":null,\"description\":null,\"brand\":null,\"weight\":null,\"length\":null,\"location\":null,\"timeStamp\":null,\"available\":false}"));
+
     }
 }

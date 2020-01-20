@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,11 +41,11 @@ public class SkateBoardServiceImplTest {
     @Test
     public void getSkateBoard_givenSkateBoardFound_shouldReturnSkateBoard() {
 
-        when(skateBoardRepository.findById(1l)).thenReturn(Optional.of(SkateBoardEntity.builder().build()));
+        when(skateBoardRepository.findById(1l)).thenReturn(Optional.of(SkateBoardEntity.builder().createDateTime(LocalDateTime.MAX).build()));
 
         SkateBoard actual = classUnderTest.getSkateBoard(1l);
 
-        assertThat(actual).isEqualToComparingFieldByField(SkateBoard.builder().build());
+        assertThat(actual).isEqualToComparingFieldByField(SkateBoard.builder().timeStamp(LocalDateTime.MAX.toString()).build());
     }
 
     @Test
@@ -60,24 +61,24 @@ public class SkateBoardServiceImplTest {
     @Test
     public void getAllAvailableSkateBoards_givenAvailableSkateBoardList_shouldReturnSkateBoard() {
 
-        when(skateBoardRepository.findAll()).thenReturn(singletonList(SkateBoardEntity.builder().ownerName("ownerName").description("description").available(true).build()));
+        when(skateBoardRepository.findAll()).thenReturn(singletonList(SkateBoardEntity.builder().ownerName("ownerName").description("description").createDateTime(LocalDateTime.MAX).available(true).build()));
 
         List<SkateBoard> actual = classUnderTest.getAllAvailableSkateBoards();
 
         assertThat(actual).hasSize(1);
-        assertThat(actual.get(0)).isEqualToComparingFieldByField(SkateBoard.builder().ownerName("ownerName").description("description").build());
+        assertThat(actual.get(0)).isEqualToComparingFieldByField(SkateBoard.builder().ownerName("ownerName").available(true).timeStamp(LocalDateTime.MAX.toString()).description("description").build());
     }
 
     @Test
     public void getAllAvailableSkateBoards_givenNonEmptyListWithUnavailableSkateBoardEntities_shouldReturnEmptyList() {
 
-        when(skateBoardRepository.findAll()).thenReturn(asList(SkateBoardEntity.builder().ownerName("ownerName").description("description").available(false).build(),
-                SkateBoardEntity.builder().ownerName("ownerName").description("description").available(true).build()));
+        when(skateBoardRepository.findAll()).thenReturn(asList(SkateBoardEntity.builder().ownerName("ownerName").description("description").available(false).createDateTime(LocalDateTime.MAX).build(),
+                SkateBoardEntity.builder().ownerName("ownerName").description("description").createDateTime(LocalDateTime.MAX).available(true).build()));
 
         List<SkateBoard> actual = classUnderTest.getAllAvailableSkateBoards();
 
         assertThat(actual).hasSize(1);
-        assertThat(actual.get(0)).isEqualToComparingFieldByField(SkateBoard.builder().ownerName("ownerName").description("description").build());
+        assertThat(actual.get(0)).isEqualToIgnoringGivenFields(SkateBoard.builder().ownerName("ownerName").description("description").available(true).timeStamp(LocalDateTime.MAX.toString()).build());
     }
 
     @Test
