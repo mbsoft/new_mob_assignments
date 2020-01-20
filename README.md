@@ -21,32 +21,33 @@ In the shared mobility space, there are a number of different types of shared as
 
 **Requirements:**
 
-1. Design your API in a RESTful way and respond with JSON. - done
-1. Make sure your code has tests. - done
-1. Consider some form of logging - not done
-1. Write the code and design your system to be as realistic and production-ready as possible. Follow best-practices and focus on quality. - meh
-1. A skateboards might have the following attributes: name of owner, brand, weight, length, location, timestamp and any other attribution you deem necessary - done
-1. Add endpoints that support your solution - done
-1. Bonus points for adding any kind of front-end that can be used to visualize available boards through use of the designed APIs - not yet
-some examples:
+1. Design your API in a RESTful way and respond with JSON. - *done*
+1. Make sure your code has tests. - *done*
+1. Consider some form of logging - *done*
+1. Write the code and design your system to be as realistic and production-ready as possible. Follow best-practices and focus on quality. - *meh*
+1. A skateboards might have the following attributes: name of owner, brand, weight, length, location, timestamp and any other attribution you deem necessary - *done*
+1. Add endpoints that support your solution - *done*
+1. Bonus points for adding any kind of front-end that can be used to visualize available boards through use of the designed APIs - *partial - swaggerUI*
+
+Some examples:
  
   * **Create skateboards:**
-(done)
+(*done*)
     - attributes for a board might include the photo, dimensions, specs etc.
     - To keep things simple, no authentication needs to be performed. 
     - POST /api/v1/skateboard
 
   * **Get skateboards**
-  (done)
+  (*done*)
     - perhaps based on status, spec filter etc.
     -GET /api/v1/skateboard  (returns all boards)   
     -GET /api/v1/skateboard/{boardId} (returns single board) 
   * **Update skateboards**
-  (done)
+  (*done*)
     - change status, add additional details/specs etc.
     -PUT /api/v1/skateboard
   * **Delete skateboard**
-  (done)
+  (*done*)
  
     -DELETE /api/v1/skateboard/{boardId}  
 
