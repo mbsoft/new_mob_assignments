@@ -1,4 +1,19 @@
-### Skateboard REST API
+`````.______     ______        ___      .______       _______    _______ .______        ______     ______   ____    ____  _______ 
+|   _  \   /  __  \      /   \     |   _  \     |       \  /  _____||   _  \      /  __  \   /  __  \  \   \  /   / |   ____|
+|  |_)  | |  |  |  |    /  ^  \    |  |_)  |    |  .--.  ||  |  __  |  |_)  |    |  |  |  | |  |  |  |  \   \/   /  |  |__   
+|   _  <  |  |  |  |   /  /_\  \   |      /     |  |  |  ||  | |_ | |      /     |  |  |  | |  |  |  |   \      /   |   __|  
+|  |_)  | |  `--'  |  /  _____  \  |  |\  \----.|  '--'  ||  |__| | |  |\  \----.|  `--'  | |  `--'  |    \    /    |  |____ 
+|______/   \______/  /__/     \__\ | _| `._____||_______/  \______| | _| `._____| \______/   \______/      \__/     |_______|
+                                                                                                                             
+                                        ______  _              _    
+                                        |  ___|| |            | |   
+                                        | |_   | |  __ _  ___ | | __
+                                        |  _|  | | / _` |/ __|| |/ /
+                                        | |    | || (_| |\__ \|   < 
+                                        \_|    |_| \__,_||___/|_|\_\
+                            
+                            
+`````
 
 In the shared mobility space, there are a number of different types of shared assets - cars, scooters, ebikes. For this project, we want to create a starting point for an API that will allow individual skateboarders to share their boards. 
 
@@ -6,7 +21,7 @@ The goal of this project is to assess development skills suitable for a backend 
 
 - **Project Name:** Skateboard REST API
 - **Project Goal:** Create/define an API that will help skateboarders to share their 'boards'
-- **Technology:** Pick any language, framework and testing framework you like
+- **Technology:** flask, python, sqlite3
 - **Deliverables:**  Fork the project into your own account. Submit a pull request on https://github.com/mbsoft/new_mob_assignments that includes your complete solution
 
 **Description: (Note: these stories are intentionally somewhat vague)**
@@ -20,6 +35,14 @@ As a skateboard owner I want to be able to modify the details for the board that
 As a skateboard borrower, I want to see a list of available boards
 
 **Task:** Build the REST API that might support the stories described above. Write unit tests for each component.
+
+** Install **
+pip install virtualenv
+virtualenv isoApp
+
+** Run **
+source isoApp/bin/activate
+(isoApp) python skateboard.py
 
 **Requirements:**
 
