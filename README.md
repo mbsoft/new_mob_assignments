@@ -58,6 +58,10 @@ npm install -g swagger ' to user swagger UI interface
 ## Run
 ```$xslt
 npm start
+
+**or**
+docker build .
+docker run -p 127.0.0.1:3200:3200 <container_id>
 ```
 ## Interactive Test Using Swagger UI
 ```$xslt
