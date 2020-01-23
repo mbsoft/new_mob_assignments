@@ -24,9 +24,13 @@ In the shared mobility space, there are a number of different types of shared as
 - **Project Name:** Boardgroove REST API
 - **Project Goal:** Create/define an API that will help skateboarders to share their 'boards'
 - **Technology:** node.js, express, swagger, mocha, chai, mongo-mock for db
-- **Deliverables:**  
+- **Deliverables:**  branch for this version is https://github.com/mbsoft/new_mob_assignments/tree/sample_js_nodejs
+- **Time Spent:** approximate your time spent on the homework (i.e. 4.5 hrs)
  
 **Task:** Build the REST API that might support the stories described above. Write unit tests for each component.
+
+**Enhancement/Feature Request List**
+- use this section to collect ideas for candidates to work on to extend the project
 
 **Requirements:**
 
