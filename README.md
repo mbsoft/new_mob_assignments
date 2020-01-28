@@ -29,6 +29,7 @@ As a skateboard borrower, I want to see a list of available boards
 1. Write the code and design your system to be as realistic and production-ready as possible. Follow best-practices and focus on quality.
 1. A skateboard might have the following attributes: name of owner, brand, weight, length, location, timestamp and any other attribution you deem necessary
 1. Add endpoints that support your solution 
+1. Try to keep track of the time spent on the project as this might be discussed
 1. Bonus points for adding any kind of front-end that can be used to visualize available boards through use of the designed APIs
 some examples:
  
