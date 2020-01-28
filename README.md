@@ -1,32 +1,32 @@
 
-`````.______     ______        ___      .______       _______    _______ .______        ______     ______   ____    ____  _______ 
+`````.______     ______        ___      .______       _______    _______ .______        ______     ______   ____    ____  _______
 |   _  \   /  __  \      /   \     |   _  \     |       \  /  _____||   _  \      /  __  \   /  __  \  \   \  /   / |   ____|
-|  |_)  | |  |  |  |    /  ^  \    |  |_)  |    |  .--.  ||  |  __  |  |_)  |    |  |  |  | |  |  |  |  \   \/   /  |  |__   
-|   _  <  |  |  |  |   /  /_\  \   |      /     |  |  |  ||  | |_ | |      /     |  |  |  | |  |  |  |   \      /   |   __|  
-|  |_)  | |  `--'  |  /  _____  \  |  |\  \----.|  '--'  ||  |__| | |  |\  \----.|  `--'  | |  `--'  |    \    /    |  |____ 
+|  |_)  | |  |  |  |    /  ^  \    |  |_)  |    |  .--.  ||  |  __  |  |_)  |    |  |  |  | |  |  |  |  \   \/   /  |  |__
+|   _  <  |  |  |  |   /  /_\  \   |      /     |  |  |  ||  | |_ | |      /     |  |  |  | |  |  |  |   \      /   |   __|
+|  |_)  | |  `--'  |  /  _____  \  |  |\  \----.|  '--'  ||  |__| | |  |\  \----.|  `--'  | |  `--'  |    \    /    |  |____
 |______/   \______/  /__/     \__\ | _| `._____||_______/  \______| | _| `._____| \______/   \______/      \__/     |_______|
-                                                                                                                             
 
-                                          _             _   _____ 
+
+                                          _             _   _____
                                           | |           | | / ____|
-                         _ __    ___    __| |  ___      | || (___  
-                        | '_ \  / _ \  / _` | / _ \ _   | | \___ \ 
+                         _ __    ___    __| |  ___      | || (___
+                        | '_ \  / _ \  / _` | / _ \ _   | | \___ \
                         | | | || (_) || (_| ||  __/| |__| | ____) |
-                        |_| |_| \___/  \__,_| \___| \____/ |_____/ 
-                                            
-                                            
+                        |_| |_| \___/  \__,_| \___| \____/ |_____/
+
+
 `````
 
 
 
-In the shared mobility space, there are a number of different types of shared assets - cars, scooters, ebikes. For this project, we want to create a starting point for an API that will allow individual skateboarders to share their boards. 
+In the shared mobility space, there are a number of different types of shared assets - cars, scooters, ebikes. For this project, we want to create a starting point for an API that will allow individual skateboarders to share their boards.
 
 - **Project Name:** Boardgroove REST API
 - **Project Goal:** Create/define an API that will help skateboarders to share their 'boards'
 - **Technology:** node.js, express, swagger, mocha, chai, mongo-mock for db
 - **Deliverables:**  branch for this version is https://github.com/mbsoft/new_mob_assignments/tree/sample_js_nodejs
 - **Time Spent:** approximate your time spent on the homework (i.e. 4.5 hrs)
- 
+
 **Task:** Build the REST API that might support the stories described above. Write unit tests for each component.
 
 **Enhancement/Feature Request List**
@@ -42,26 +42,26 @@ In the shared mobility space, there are a number of different types of shared as
 1. Add endpoints that support your solution - *done*
 1. Bonus points for adding any kind of front-end that can be used to visualize available boards through use of the designed APIs - *partial (swagger ui)*
 some examples:
- 
+
   * **Create skateboards:**
 *done*
     - attributes for a board might include the photo, dimensions, specs etc.
-    - To keep things simple, no authentication needs to be performed. 
+    - To keep things simple, no authentication needs to be performed.
     - POST /api/v1/skateboard
 
   * **Get skateboards**
   *done*
     - perhaps based on status, spec filter etc.
-    -GET /api/v1/skateboard  (returns all boards)   
-    -GET /api/v1/skateboard/{boardId} (returns single board) 
+    -GET /api/v1/skateboard  (returns all boards)
+    -GET /api/v1/skateboard/{boardId} (returns single board)
   * **Update skateboards**
   *done*
     - change status, add additional details/specs etc.
     -PUT /api/v1/skateboard
   * **Delete skateboard**
   *done*
- 
-    -DELETE /api/v1/skateboard/{boardId}  
+
+    -DELETE /api/v1/skateboard/{boardId}
 
 ##Install
 ```$xslt
@@ -134,7 +134,7 @@ Express skipped binding while running test process
 
 
   7 passing (67ms)
-  
+
 ---------------------------------------|---------|----------|---------|---------|-------------------
 File                                   | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
 ---------------------------------------|---------|----------|---------|---------|-------------------
