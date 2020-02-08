@@ -1,5 +1,9 @@
 package com.detroitlabs.skateboard.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "All details about SkateBoard")
 public class SkateBoard {
     private int id;
     private String ownerName;
