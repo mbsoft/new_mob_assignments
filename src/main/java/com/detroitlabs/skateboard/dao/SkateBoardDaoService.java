@@ -13,8 +13,8 @@ public class SkateBoardDaoService {
 
     static {
         skateBoards.add(new SkateBoard(1, "Rohan", "Adidas", 40, 20, true));
-        skateBoards.add(new SkateBoard(1, "James", "Nike", 50, 22, true));
-        skateBoards.add(new SkateBoard(1, "Eva", "Puma", 48, 24, true));
+        skateBoards.add(new SkateBoard(2, "James", "Nike", 50, 22, true));
+        skateBoards.add(new SkateBoard(3, "Eva", "Puma", 48, 24, true));
     }
 
     public SkateBoard save(SkateBoard skateBoard) {
@@ -23,5 +23,14 @@ public class SkateBoardDaoService {
         }
         skateBoards.add(skateBoard);
         return skateBoard;
+    }
+
+    public SkateBoard findOne(Integer id) {
+        for (SkateBoard skateBoard : skateBoards) {
+            if (skateBoard.getId().equals(id)) {
+                return skateBoard;
+            }
+        }
+        return null;
     }
 }
