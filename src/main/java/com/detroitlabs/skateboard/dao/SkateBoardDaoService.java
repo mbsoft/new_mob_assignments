@@ -33,4 +33,8 @@ public class SkateBoardDaoService {
         }
         return null;
     }
+
+    public List<SkateBoard> findAll() {
+        return skateBoards;
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 public class SkateBoardController {
@@ -38,5 +39,10 @@ public class SkateBoardController {
             throw new SkateBoardNotFoundException("id-" + id);
 
         return skateBoard;
+    }
+
+    @GetMapping(path = "/users")
+    public List<SkateBoard> retrieveAllUsers() {
+        return skateBoardDaoService.findAll();
     }
 }

@@ -19,10 +19,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(value = SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = NewMobAssignmentsApplication.class)
-public class SkateBoardControllerTest {
+public class SkateBoardTest {
 
     ArrayList<SkateBoard> skateBoards = new ArrayList<>();
 
@@ -102,11 +103,15 @@ public class SkateBoardControllerTest {
         Assert.assertNotEquals(1, skateBoard3.getId().intValue());
     }
 
+    @Test
+    public void getAvailableBoards_returnsAvailableBoards() throws Exception{
+        List<SkateBoard> boards = skateBoardController.retrieveAllUsers();
+        Assert.assertEquals(3, boards.size());
+    }
+
     @After
     public void tearDown() {
-        for (SkateBoard skateBoard : skateBoards) {
-            skateBoards.remove(skateBoard.getId());
-        }
+        skateBoards.clear();
     }
 
 }
