@@ -2,73 +2,41 @@ package com.detroitlabs.skateboard.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 @ApiModel(description = "All details about SkateBoard")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
 public class SkateBoard {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @Size(min = 2, message = "Owner Name should have atleast 2 characters")
+    @ApiModelProperty(notes = "Owner should have atleast 2 characters")
     private String ownerName;
-    private String boardType;
+
+    @Size(min = 2, message = "Brand Name should have atleast 2 characters")
+    @ApiModelProperty(notes = "Brand should have atleast 2 characters")
+    private String brand;
+
+    @ApiModelProperty(notes = "Weight should be atleast 50 lb")
     private int weight;
+
+    @ApiModelProperty(notes = "Length should be atleast 15 cm")
     private int length;
+
     private boolean isBoardAvailable;
-
-    public SkateBoard() {
-    }
-
-    public SkateBoard(int id, String ownerName, String boardType, int weight, int length, boolean isBoardAvailable) {
-        this.id = id;
-        this.ownerName = ownerName;
-        this.boardType = boardType;
-        this.weight = weight;
-        this.length = length;
-        this.isBoardAvailable = isBoardAvailable;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
-
-    public String getBoardType() {
-        return boardType;
-    }
-
-    public void setBoardType(String boardType) {
-        this.boardType = boardType;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    public boolean isBoardAvailable() {
-        return isBoardAvailable;
-    }
-
-    public void setBoardAvailable(boolean boardAvailable) {
-        isBoardAvailable = boardAvailable;
-    }
 }
