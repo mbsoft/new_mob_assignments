@@ -77,4 +77,21 @@ public class SkateBoardDaoService {
         }
         return null;
     }
+
+
+    public SkateBoard updateSkateBoardDetails(Integer id, SkateBoard skateBoardDetails) {
+        for (SkateBoard skateBoard : skateBoards) {
+            if (skateBoard.getId().equals(id)) {
+
+                skateBoard.setOwnerName(skateBoardDetails.getOwnerName());
+                skateBoard.setBrand(skateBoardDetails.getBrand());
+                skateBoard.setLength(skateBoardDetails.getLength());
+                skateBoard.setWeight(skateBoardDetails.getWeight());
+                skateBoard.setBoardAvailable(skateBoardDetails.isBoardAvailable());
+
+                return skateBoard;
+            }
+        }
+        return null;
+    }
 }

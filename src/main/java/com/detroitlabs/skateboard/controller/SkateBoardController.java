@@ -76,7 +76,7 @@ public class SkateBoardController {
         return skateBoard;
     }
 
-    @DeleteMapping("api/v1/skateboards/{id}")
+    @DeleteMapping("/api/v1/skateboards/{id}")
     public ResponseEntity<Object> deleteSkateBoard(@PathVariable Integer id) {
         SkateBoard skateBoard = skateBoardDaoService.deleteSkateBoardById(id);
 
@@ -84,5 +84,18 @@ public class SkateBoardController {
             throw new SkateBoardNotFoundException("SkateBoard not found with id " + id);
 
         return ResponseEntity.status(200).build();
+    }
+
+    @PutMapping("/api/v1/skateboards/{id}")
+    public ResponseEntity<SkateBoard> updateSkateBoard(@PathVariable(value = "id") Integer id,
+                                                       @Valid @RequestBody SkateBoard skateBoardDetails) {
+        SkateBoard skateBoard = skateBoardDaoService.findOne(id);
+
+        if (skateBoard == null)
+            throw new SkateBoardNotFoundException("SkateBoard not found with id " + id);
+
+        final SkateBoard updateSkateBoard = skateBoardDaoService.updateSkateBoardDetails(id, skateBoardDetails);
+
+        return ResponseEntity.ok(updateSkateBoard);
     }
 }
