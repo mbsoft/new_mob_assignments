@@ -1,6 +1,8 @@
 # Skateboard Data Accessor
 Backend REST API to help skateboarders to share their 'boards'
 
+The microservice can be run through Gradle or Maven: https://spring.io/guides/gs/spring-boot/#_run_the_application
+
 ## Implementation Details
 **Technologies Used**
 - Java
