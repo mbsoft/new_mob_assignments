@@ -36,7 +36,7 @@ public class SkateboardBorrowerController {
     }
 
     @PostMapping("/search")
-    public ResponseEntity searchByFilter(FindBySpecsFilterRequest request) {
+    public ResponseEntity searchByFilter(@RequestBody FindBySpecsFilterRequest request) {
         log.info("Received request to search for skateboards based on filter: {}", request);
         return skateboardBorrowerService.searchForBoards(request);
     }

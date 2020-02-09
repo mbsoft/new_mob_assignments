@@ -48,7 +48,7 @@ public class SkateboardOwnerService {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(owners, HttpStatus.OK);
     }
 
     public ResponseEntity<String> deleteOwner(Long id) throws OwnerNotFoundException {

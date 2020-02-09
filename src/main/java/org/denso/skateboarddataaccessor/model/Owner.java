@@ -1,5 +1,6 @@
 package org.denso.skateboarddataaccessor.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -22,7 +23,8 @@ public class Owner {
     @NotBlank
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JsonBackReference
     @JoinColumn(name = "owner_id")
     private Set<Skateboard> boards;
 

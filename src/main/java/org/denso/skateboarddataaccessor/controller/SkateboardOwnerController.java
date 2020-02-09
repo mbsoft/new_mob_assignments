@@ -27,7 +27,7 @@ public class SkateboardOwnerController {
         this.skateboardOwnerService = skateboardOwnerService;
     }
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create")
     public ResponseEntity<String> create(@Valid @RequestBody Owner owner) {
         log.info("Received request to create owner: {}", owner);
         return skateboardOwnerService.addOwner(owner);

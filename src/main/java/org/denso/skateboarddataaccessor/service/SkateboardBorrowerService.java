@@ -5,7 +5,6 @@ import org.denso.skateboarddataaccessor.model.request.FindBySpecsFilterRequest;
 import org.denso.skateboarddataaccessor.repository.SkateboardRepository;
 import org.denso.skateboarddataaccessor.repository.specification.SkateboardSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -42,6 +41,6 @@ public class SkateboardBorrowerService {
 
     public ResponseEntity searchForBoards(FindBySpecsFilterRequest filter) {
         SkateboardSpecification skateboardSpecification = new SkateboardSpecification(filter);
-        return new ResponseEntity<>(skateboardRepository.findAll((Pageable) where(skateboardSpecification)), HttpStatus.OK);
+        return new ResponseEntity(skateboardRepository.findAll(where(skateboardSpecification)), HttpStatus.OK);
     }
 }
