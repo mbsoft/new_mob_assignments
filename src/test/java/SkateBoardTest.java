@@ -1,5 +1,5 @@
 import com.detroitlabs.skateboard.NewMobAssignmentsApplication;
-import com.detroitlabs.skateboard.controller.SkateBoardController;
+import com.detroitlabs.skateboard.controller.SkateBoardResource;
 import com.detroitlabs.skateboard.model.SkateBoard;
 import org.junit.After;
 import org.junit.Assert;
@@ -34,7 +34,7 @@ public class SkateBoardTest {
     int randomServerPort;
 
     @Autowired
-    private SkateBoardController skateBoardController;
+    private SkateBoardResource skateBoardResource;
 
     private MockMvc mockMvc;
 
@@ -66,7 +66,7 @@ public class SkateBoardTest {
                 .isBoardAvailable(true)
                 .build());
 
-        mockMvc = MockMvcBuilders.standaloneSetup(this.skateBoardController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(this.skateBoardResource).build();
     }
 
     @Test
@@ -92,65 +92,65 @@ public class SkateBoardTest {
 
     @Test
     public void getSkateBoardById_ReturnsSuccessful_IfFound() throws Exception {
-        SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoard(1);
+        SkateBoard skateBoard1 = skateBoardResource.retrieveSkateBoard(1);
         Assert.assertEquals(1, skateBoard1.getId().intValue());
 
-        SkateBoard skateBoard2 = skateBoardController.retrieveSkateBoard(2);
+        SkateBoard skateBoard2 = skateBoardResource.retrieveSkateBoard(2);
         Assert.assertEquals(2, skateBoard2.getId().intValue());
 
         //when value not present
-        SkateBoard skateBoard3 = skateBoardController.retrieveSkateBoard(3);
+        SkateBoard skateBoard3 = skateBoardResource.retrieveSkateBoard(3);
         Assert.assertNotEquals(1, skateBoard3.getId().intValue());
     }
 
     @Test
     public void getAllAvailableBoards_ReturnsSuccessful_IfFound() throws Exception {
-        List<SkateBoard> boards = skateBoardController.retrieveAllSkateboards();
+        List<SkateBoard> boards = skateBoardResource.retrieveAllSkateboards();
         Assert.assertEquals(3, boards.size());
     }
 
     @Test
     public void getSkateBoardByLength_ReturnsSuccessful_IfFound() throws Exception {
-        SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoardByLength(20);
+        SkateBoard skateBoard1 = skateBoardResource.retrieveSkateBoardByLength(20);
         Assert.assertEquals(20, skateBoard1.getLength());
 
-        SkateBoard skateBoard2 = skateBoardController.retrieveSkateBoardByLength(22);
+        SkateBoard skateBoard2 = skateBoardResource.retrieveSkateBoardByLength(22);
         Assert.assertEquals(22, skateBoard2.getLength());
 
-        SkateBoard skateBoard3 = skateBoardController.retrieveSkateBoardByLength(24);
+        SkateBoard skateBoard3 = skateBoardResource.retrieveSkateBoardByLength(24);
         Assert.assertNotEquals(21, skateBoard3.getLength());
     }
 
     @Test
     public void getSkateBoardByWeight_ReturnsSuccessful_IfFound() throws Exception {
-        SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoardByWeight(40);
+        SkateBoard skateBoard1 = skateBoardResource.retrieveSkateBoardByWeight(40);
         Assert.assertEquals(40, skateBoard1.getWeight());
 
-        SkateBoard skateBoard2 = skateBoardController.retrieveSkateBoardByWeight(50);
+        SkateBoard skateBoard2 = skateBoardResource.retrieveSkateBoardByWeight(50);
         Assert.assertEquals(50, skateBoard2.getWeight());
 
-        SkateBoard skateBoard3 = skateBoardController.retrieveSkateBoardByWeight(48);
+        SkateBoard skateBoard3 = skateBoardResource.retrieveSkateBoardByWeight(48);
         Assert.assertNotEquals(22, skateBoard3.getWeight());
     }
 
     @Test
     public void getSkateBoardByBrand_ReturnsSuccessful_IfFound() throws Exception {
-        SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoardByBrand("Nike");
+        SkateBoard skateBoard1 = skateBoardResource.retrieveSkateBoardByBrand("Nike");
         Assert.assertEquals("Nike", skateBoard1.getBrand());
 
-        SkateBoard skateBoard2 = skateBoardController.retrieveSkateBoardByBrand("Adidas");
+        SkateBoard skateBoard2 = skateBoardResource.retrieveSkateBoardByBrand("Adidas");
         Assert.assertEquals("Adidas", skateBoard2.getBrand());
 
-        SkateBoard skateBoard3 = skateBoardController.retrieveSkateBoardByBrand("Puma");
+        SkateBoard skateBoard3 = skateBoardResource.retrieveSkateBoardByBrand("Puma");
         Assert.assertNotEquals("Rebook", skateBoard3.getBrand());
     }
 
     @Test
     public void deleteSkateBoardById_ReturnsSuccessful_IfFound() throws Exception {
-        List<SkateBoard> boards = skateBoardController.retrieveAllSkateboards();
+        List<SkateBoard> boards = skateBoardResource.retrieveAllSkateboards();
         Assert.assertEquals(4, boards.size());
 
-        ResponseEntity<Object> skateBoard1 = skateBoardController.deleteSkateBoard(1);
+        ResponseEntity<Object> skateBoard1 = skateBoardResource.deleteSkateBoard(1);
         Assert.assertEquals(200, skateBoard1.getStatusCodeValue());
 
         Assert.assertEquals(3, boards.size());
