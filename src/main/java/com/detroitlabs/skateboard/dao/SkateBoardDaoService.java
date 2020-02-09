@@ -3,9 +3,8 @@ package com.detroitlabs.skateboard.dao;
 import com.detroitlabs.skateboard.model.SkateBoard;
 import org.springframework.stereotype.Component;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 @Component
@@ -42,8 +41,8 @@ public class SkateBoardDaoService {
 
     public SkateBoard findByLength(Integer length) {
         for (SkateBoard skateBoard : skateBoards) {
-            if ((skateBoard.getLength()==length)) {
-                return  skateBoard;
+            if ((skateBoard.getLength() == length)) {
+                return skateBoard;
             }
         }
         return null;
@@ -51,8 +50,8 @@ public class SkateBoardDaoService {
 
     public SkateBoard findByWeight(Integer weight) {
         for (SkateBoard skateBoard : skateBoards) {
-            if ((skateBoard.getWeight()==weight)) {
-                return  skateBoard;
+            if ((skateBoard.getWeight() == weight)) {
+                return skateBoard;
             }
         }
         return null;
@@ -61,7 +60,19 @@ public class SkateBoardDaoService {
     public SkateBoard findByBrand(String brand) {
         for (SkateBoard skateBoard : skateBoards) {
             if ((skateBoard.getBrand().equals(brand))) {
-                return  skateBoard;
+                return skateBoard;
+            }
+        }
+        return null;
+    }
+
+    public SkateBoard deleteSkateBoardById(Integer id) {
+        Iterator<SkateBoard> iterator = skateBoards.iterator();
+        while (iterator.hasNext()) {
+            SkateBoard skateBoard = iterator.next();
+            if (skateBoard.getId().equals(id)) {
+                iterator.remove();
+                return skateBoard;
             }
         }
         return null;

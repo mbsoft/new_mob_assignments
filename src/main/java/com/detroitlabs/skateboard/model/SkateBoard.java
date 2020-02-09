@@ -38,5 +38,6 @@ public class SkateBoard {
     @ApiModelProperty(notes = "Length should be atleast 15 cm")
     private int length;
 
+    @ApiModelProperty(notes = "Skateboard is available or not")
     private boolean isBoardAvailable;
 }

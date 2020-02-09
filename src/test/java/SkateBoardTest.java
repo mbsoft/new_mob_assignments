@@ -91,7 +91,7 @@ public class SkateBoardTest {
     }
 
     @Test
-    public void getSkateBoard_ReturnsSuccessfulId_IfFound() throws Exception {
+    public void getSkateBoardById_ReturnsSuccessful_IfFound() throws Exception {
         SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoard(1);
         Assert.assertEquals(1, skateBoard1.getId().intValue());
 
@@ -104,13 +104,13 @@ public class SkateBoardTest {
     }
 
     @Test
-    public void getAvailableBoards_returnsAvailableBoards() throws Exception {
-        List<SkateBoard> boards = skateBoardController.retrieveAllUsers();
+    public void getAllAvailableBoards_ReturnsSuccessful_IfFound() throws Exception {
+        List<SkateBoard> boards = skateBoardController.retrieveAllSkateboards();
         Assert.assertEquals(3, boards.size());
     }
 
     @Test
-    public void getSkateBoard_ReturnsSuccessfulLength_IfFound() throws Exception {
+    public void getSkateBoardByLength_ReturnsSuccessful_IfFound() throws Exception {
         SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoardByLength(20);
         Assert.assertEquals(20, skateBoard1.getLength());
 
@@ -122,7 +122,7 @@ public class SkateBoardTest {
     }
 
     @Test
-    public void getSkateBoard_ReturnsSuccessfulWeight_IfFound() throws Exception {
+    public void getSkateBoardByWeight_ReturnsSuccessful_IfFound() throws Exception {
         SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoardByWeight(40);
         Assert.assertEquals(40, skateBoard1.getWeight());
 
@@ -134,7 +134,7 @@ public class SkateBoardTest {
     }
 
     @Test
-    public void getSkateBoard_ReturnsSuccessfulBrand_IfFound() throws Exception {
+    public void getSkateBoardByBrand_ReturnsSuccessful_IfFound() throws Exception {
         SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoardByBrand("Nike");
         Assert.assertEquals("Nike", skateBoard1.getBrand());
 
@@ -143,6 +143,17 @@ public class SkateBoardTest {
 
         SkateBoard skateBoard3 = skateBoardController.retrieveSkateBoardByBrand("Puma");
         Assert.assertNotEquals("Rebook", skateBoard3.getBrand());
+    }
+
+    @Test
+    public void deleteSkateBoardById_ReturnsSuccessful_IfFound() throws Exception {
+        List<SkateBoard> boards = skateBoardController.retrieveAllSkateboards();
+        Assert.assertEquals(4, boards.size());
+
+        ResponseEntity<Object> skateBoard1 = skateBoardController.deleteSkateBoard(1);
+        Assert.assertEquals(200, skateBoard1.getStatusCodeValue());
+
+        Assert.assertEquals(3, boards.size());
     }
 
     @After
