@@ -4,6 +4,7 @@ package org.denso.skateboarddataacessor.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.denso.skateboarddataaccessor.controller.SkateboardOwnerController;
 import org.denso.skateboarddataaccessor.exception.OwnerNotFoundException;
+import org.denso.skateboarddataaccessor.model.Skateboard;
 import org.denso.skateboarddataaccessor.model.request.UpdateOwnerBoardsRequest;
 import org.denso.skateboarddataaccessor.service.SkateboardOwnerService;
 import org.junit.Before;
@@ -18,12 +19,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class SkateboardOwnerControllerTest {
@@ -50,14 +52,15 @@ public class SkateboardOwnerControllerTest {
                 .andExpect(status().isNotFound());
     }
 
-    @Test(expected = OwnerNotFoundException.class)
+    @Test
     public void updateOwnerBoardsShouldThrowException_OwnerNotFound() throws Exception {
         when(skateboardOwnerService.updateOwnerBoards(any(UpdateOwnerBoardsRequest.class))).thenThrow(new OwnerNotFoundException(1L));
 
-        UpdateOwnerBoardsRequest request = UpdateOwnerBoardsRequest.builder()
-                .ownerId(1L)
-                .boards(new HashSet<>())
-                .build();
+        Set<Skateboard> boards = new HashSet<>();
+        boards.add(new Skateboard());
+        UpdateOwnerBoardsRequest request = new UpdateOwnerBoardsRequest();
+        request.setOwnerId(1L);
+        request.setBoards(boards);
 
         mockMvc.perform(post("/owner/updateBoards")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -65,11 +68,11 @@ public class SkateboardOwnerControllerTest {
                 .andExpect(status().isNotFound());
     }
 
-    @Test(expected = OwnerNotFoundException.class)
+    @Test
     public void updateOwnerNameShouldThrowException_NoOwnerInDatabase() throws Exception {
         when(skateboardOwnerService.updateOwnerName(anyLong(), anyString())).thenThrow(new OwnerNotFoundException(1L));
 
-        mockMvc.perform(post("/owner/1/newName"))
+        mockMvc.perform(put("/owner/1/newName"))
                 .andExpect(status().isNotFound());
     }
 }
