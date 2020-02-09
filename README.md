@@ -52,3 +52,20 @@ Sample Requests
   	"maxLength": "25",
   	"minHeight": "30"
  }`
+ 
+## Requirements
+1. Design your API in a RESTful way and respond with JSON. **_Done_**
+
+2. Make sure your code has tests **_Done_**
+
+3. Consider some form of logging **_Done_**
+
+4. Write the code and design your system to be as realistic and production-ready as possible. Follow best practices and 
+focus on quality. **_Done_**
+
+5. A skateboard might have the following attributes: name of owner, brand, weight, length, location, timestamp and any 
+other attribution you deem necessary. **_Done_**
+
+6. Add endpoints that support your solution. **_Done_**
+
+7. Bonus points for adding any kind of front-end that can be used to visualize available boards. **_Done_**
