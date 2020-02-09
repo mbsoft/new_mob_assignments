@@ -45,7 +45,7 @@ public class SkateBoardTest {
                 .id(1)
                 .ownerName("Rohan Dongre")
                 .brand("Adidas")
-                .weight(60)
+                .weight(40)
                 .length(20)
                 .isBoardAvailable(true)
                 .build());
@@ -53,16 +53,16 @@ public class SkateBoardTest {
                 .id(2)
                 .ownerName("John Hive")
                 .brand("Nike")
-                .weight(80)
-                .length(23)
+                .weight(50)
+                .length(22)
                 .isBoardAvailable(true)
                 .build());
         skateBoards.add(SkateBoard.builder()
                 .id(3)
                 .ownerName("Brittany Spear")
                 .brand("Puma")
-                .weight(65)
-                .length(30)
+                .weight(48)
+                .length(24)
                 .isBoardAvailable(true)
                 .build());
 
@@ -91,7 +91,7 @@ public class SkateBoardTest {
     }
 
     @Test
-    public void getSkateBoard_ReturnsSuccessfulCode_IfFound() throws Exception {
+    public void getSkateBoard_ReturnsSuccessfulId_IfFound() throws Exception {
         SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoard(1);
         Assert.assertEquals(1, skateBoard1.getId().intValue());
 
@@ -104,9 +104,33 @@ public class SkateBoardTest {
     }
 
     @Test
-    public void getAvailableBoards_returnsAvailableBoards() throws Exception{
+    public void getAvailableBoards_returnsAvailableBoards() throws Exception {
         List<SkateBoard> boards = skateBoardController.retrieveAllUsers();
         Assert.assertEquals(3, boards.size());
+    }
+
+    @Test
+    public void getSkateBoard_ReturnsSuccessfulLength_IfFound() throws Exception {
+        SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoardByLength(20);
+        Assert.assertEquals(20, skateBoard1.getLength());
+
+        SkateBoard skateBoard2 = skateBoardController.retrieveSkateBoardByLength(22);
+        Assert.assertEquals(22, skateBoard2.getLength());
+
+        SkateBoard skateBoard3 = skateBoardController.retrieveSkateBoardByLength(24);
+        Assert.assertNotEquals(21, skateBoard3.getLength());
+    }
+
+    @Test
+    public void getSkateBoard_ReturnsSuccessfulWeight_IfFound() throws Exception {
+        SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoardByWeight(40);
+        Assert.assertEquals(40, skateBoard1.getWeight());
+
+        SkateBoard skateBoard2 = skateBoardController.retrieveSkateBoardByWeight(50);
+        Assert.assertEquals(50, skateBoard2.getWeight());
+
+        SkateBoard skateBoard3 = skateBoardController.retrieveSkateBoardByWeight(48);
+        Assert.assertNotEquals(22, skateBoard3.getWeight());
     }
 
     @After
