@@ -1,7 +1,7 @@
 package org.denso.skateboarddataaccessor.model.request;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.denso.skateboarddataaccessor.model.Skateboard;
 
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class UpdateOwnerBoardsRequest {
 
     @NonNull

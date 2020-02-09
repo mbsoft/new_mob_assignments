@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Entity;
@@ -41,6 +42,11 @@ public class Skateboard {
 
     @NonNull
     private boolean available;
+
+    private String photoLink;
+
+    @CreationTimestamp
+    private Date created;
 
     @UpdateTimestamp
     private Date lastUpdated;
