@@ -24,7 +24,8 @@ Sample Requests
 
 1. Create an owner with skateboards
 
-`{
+```
+{
  	"name": "Kenan Alkiek",
  	"boards": [
  		{
@@ -44,16 +45,18 @@ Sample Requests
  			"available": false
  		}
  	]
- }`
-
+ }
+```
 
 2. Search the marketplace through board specs (/borrower/search)
 
-`{
+```
+{
   	"minLength": "13",
   	"maxLength": "25",
   	"minHeight": "30"
- }`
+ }
+```
  
 ## Requirements
 1. Design your API in a RESTful way and respond with JSON. **_Done_**
