@@ -133,6 +133,18 @@ public class SkateBoardTest {
         Assert.assertNotEquals(22, skateBoard3.getWeight());
     }
 
+    @Test
+    public void getSkateBoard_ReturnsSuccessfulBrand_IfFound() throws Exception {
+        SkateBoard skateBoard1 = skateBoardController.retrieveSkateBoardByBrand("Nike");
+        Assert.assertEquals("Nike", skateBoard1.getBrand());
+
+        SkateBoard skateBoard2 = skateBoardController.retrieveSkateBoardByBrand("Adidas");
+        Assert.assertEquals("Adidas", skateBoard2.getBrand());
+
+        SkateBoard skateBoard3 = skateBoardController.retrieveSkateBoardByBrand("Puma");
+        Assert.assertNotEquals("Rebook", skateBoard3.getBrand());
+    }
+
     @After
     public void tearDown() {
         skateBoards.clear();

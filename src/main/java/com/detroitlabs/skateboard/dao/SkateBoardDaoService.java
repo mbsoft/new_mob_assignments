@@ -57,4 +57,13 @@ public class SkateBoardDaoService {
         }
         return null;
     }
+
+    public SkateBoard findByBrand(String brand) {
+        for (SkateBoard skateBoard : skateBoards) {
+            if ((skateBoard.getBrand().equals(brand))) {
+                return  skateBoard;
+            }
+        }
+        return null;
+    }
 }

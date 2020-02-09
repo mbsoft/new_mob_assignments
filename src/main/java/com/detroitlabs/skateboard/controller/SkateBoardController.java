@@ -66,4 +66,14 @@ public class SkateBoardController {
 
         return skateBoard;
     }
+
+    @GetMapping("/api/v1/skateboard/byBrand/{brand}")
+    public SkateBoard retrieveSkateBoardByBrand(@PathVariable String brand) {
+        SkateBoard skateBoard = skateBoardDaoService.findByBrand(brand);
+
+        if (skateBoard == null)
+            throw new SkateBoardNotFoundException("SkateBoard not found with brand " + brand);
+
+        return skateBoard;
+    }
 }
