@@ -1,65 +1,76 @@
-### Skateboard REST API
+# Skateboard Data Accessor
+Backend REST API to help skateboarders to share their 'boards'
 
-In the shared mobility space, there are a number of different types of shared assets - cars, scooters, ebikes. For this project, we want to create a starting point for an API that will allow individual skateboarders to share their boards. 
+The microservice can be run through Gradle or Maven: https://spring.io/guides/gs/spring-boot/#_run_the_application
 
-The goal of this project is to assess development skills suitable for a backend developer position by testing knowledge and proficiency with software design, unit testing and web technologies like HTTP and REST.
+## Implementation Details
+**Technologies Used**
+- Java
+- Spring boot
+- Gradle
+- Mockito
 
-- **Project Name:** Skateboard REST API
-- **Project Goal:** Create/define an API that will help skateboarders to share their 'boards'
-- **Technology:** Pick any language, framework and testing framework you like
-- **Deliverables:**  Fork the project into your own account. Submit a pull request on https://github.com/mbsoft/new_mob_assignments that includes your complete solution
+**Assumptions Made**
 
-**Description: (Note: these stories are intentionally somewhat vague)**
+- In-memory database because the application is for demo purposes only
+- To upload a skateboard to the marketplace you must be a registered owner
+- You cannot search for skateboards that are not marked available
 
-As a skateboard owner I want to be able to add my individual board to a skateboard sharing marketplace.
+##  Demo
+Swagger documentation is available at /swagger-ui.html
+Test out the endpoints there!
 
-As a skateboard owner I want to be able to indicate that my board is available or unavailable for sharing
+Sample Requests
 
-As a skateboard owner I want to be able to modify the details for the board that I share.
+1. Create an owner with skateboards
 
-As a skateboard borrower, I want to see a list of available boards
+```
+{
+ 	"name": "Kenan Alkiek",
+ 	"boards": [
+ 		{
+ 			"brand": "FreshPark",
+ 			"weight": "2.2",
+ 			"height": "30.4",
+ 			"width": "15.4",
+ 			"length": "18.9",
+ 			"available": true
+ 		}, 
+ 		{
+ 			"brand": "Madrid Skateboards",
+ 			"weight": "5.7",
+ 			"height": "28.5",
+ 			"width": "16.7",
+ 			"length": "33.2",
+ 			"available": false
+ 		}
+ 	]
+ }
+```
 
-**Task:** Build the REST API that might support the stories described above. Write unit tests for each component.
+2. Search the marketplace through board specs (/borrower/search)
 
-**Requirements:**
-
-1. Design your API in a RESTful way and respond with JSON.
-1. Make sure your code has tests.
-1. Consider some form of logging
-1. Write the code and design your system to be as realistic and production-ready as possible. Follow best-practices and focus on quality.
-1. A skateboard might have the following attributes: name of owner, brand, weight, length, location, timestamp and any other attribution you deem necessary
-1. Add endpoints that support your solution 
-1. Try to keep track of the time spent on the project as this might be discussed
-1. Bonus points for adding any kind of front-end that can be used to visualize available boards through use of the designed APIs
-some examples:
+```
+{
+  	"minLength": "13",
+  	"maxLength": "25",
+  	"minHeight": "30"
+ }
+```
  
-  * **Create skateboard:**
+## Requirements
+1. Design your API in a RESTful way and respond with JSON. **_Done_**
 
-    - attributes for a board might include the photo, dimensions, specs etc.
-    - To keep things simple, no authentication needs to be performed. 
+2. Make sure your code has tests **_Done_**
 
-  * **Get skateboards**
-    - perhaps based on status, spec filter etc.
-    
-  * **Update skateboard**
-    - change status, add additional details/specs etc.
-  
-  * **Delete skateboard**
-  
-  
- ....
+3. Consider some form of logging **_Done_**
 
-1. Describe your solution in a README and how to run it. Ensure that you clearly state assumptions that you made.
+4. Write the code and design your system to be as realistic and production-ready as possible. Follow best practices and 
+focus on quality. **_Done_**
 
+5. A skateboard might have the following attributes: name of owner, brand, weight, length, location, timestamp and any 
+other attribution you deem necessary. **_Done_**
 
-**Guidelines**
+6. Add endpoints that support your solution. **_Done_**
 
-Please commit early and often and with good commit messages. This will allow us to see how you've approached the problem. Don't worry about changing things around often.
-
-Be prepared to discuss some of your approaches and design decisions.
- 
-Please ask any questions if something is unclear
-
-**What is this?**
-
-This repo contains the job assignment for potential Backend engineers in DENSO's New Mobility team.
+7. Bonus points for adding any kind of front-end that can be used to visualize available boards. **_Done_**
