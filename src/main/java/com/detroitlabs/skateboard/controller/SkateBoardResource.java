@@ -1,8 +1,8 @@
 package com.detroitlabs.skateboard.controller;
 
-import com.detroitlabs.skateboard.dao.SkateBoardDaoService;
 import com.detroitlabs.skateboard.exception.SkateBoardNotFoundException;
 import com.detroitlabs.skateboard.model.SkateBoard;
+import com.detroitlabs.skateboard.service.SkateBoardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +16,11 @@ import java.util.List;
 public class SkateBoardResource {
 
     @Autowired
-    private SkateBoardDaoService skateBoardDaoService;
+    private SkateBoardServiceImpl skateBoardServiceImpl;
 
-    @PostMapping(path = "/api/v1/skateboard")
+    @PostMapping(path = "/api/v1/createSkateboard")
     public ResponseEntity<Object> createSkateBoard(@Valid @RequestBody SkateBoard skateBoard) {
-        SkateBoard createSkateBoard = skateBoardDaoService.save(skateBoard);
+        SkateBoard createSkateBoard = skateBoardServiceImpl.save(skateBoard);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
@@ -33,7 +33,7 @@ public class SkateBoardResource {
 
     @GetMapping(path = "/api/v1/skateboards/{id}")
     public SkateBoard retrieveSkateBoard(@PathVariable Integer id) {
-        SkateBoard skateBoard = skateBoardDaoService.findOne(id);
+        SkateBoard skateBoard = skateBoardServiceImpl.findOne(id);
 
         if (skateBoard == null)
             throw new SkateBoardNotFoundException("SkateBoard not found with id " + id);
@@ -41,14 +41,14 @@ public class SkateBoardResource {
         return skateBoard;
     }
 
-    @GetMapping(path = "/skateboards")
+    @GetMapping(path = "/api/v1/skateboards")
     public List<SkateBoard> retrieveAllSkateboards() {
-        return skateBoardDaoService.findAll();
+        return skateBoardServiceImpl.findAll();
     }
 
     @GetMapping("/api/v1/skateboards/byLength/{length}")
     public SkateBoard retrieveSkateBoardByLength(@PathVariable Integer length) {
-        SkateBoard skateBoard = skateBoardDaoService.findByLength(length);
+        SkateBoard skateBoard = skateBoardServiceImpl.findByLength(length);
 
         if (skateBoard == null)
             throw new SkateBoardNotFoundException("SkateBoard not found with length " + length);
@@ -58,7 +58,7 @@ public class SkateBoardResource {
 
     @GetMapping("/api/v1/skateboards/byWeight/{weight}")
     public SkateBoard retrieveSkateBoardByWeight(@PathVariable Integer weight) {
-        SkateBoard skateBoard = skateBoardDaoService.findByWeight(weight);
+        SkateBoard skateBoard = skateBoardServiceImpl.findByWeight(weight);
 
         if (skateBoard == null)
             throw new SkateBoardNotFoundException("SkateBoard not found with weight " + weight);
@@ -68,7 +68,7 @@ public class SkateBoardResource {
 
     @GetMapping("/api/v1/skateboards/byBrand/{brand}")
     public SkateBoard retrieveSkateBoardByBrand(@PathVariable String brand) {
-        SkateBoard skateBoard = skateBoardDaoService.findByBrand(brand);
+        SkateBoard skateBoard = skateBoardServiceImpl.findByBrand(brand);
 
         if (skateBoard == null)
             throw new SkateBoardNotFoundException("SkateBoard not found with brand " + brand);
@@ -78,7 +78,7 @@ public class SkateBoardResource {
 
     @DeleteMapping("/api/v1/skateboards/{id}")
     public ResponseEntity<Object> deleteSkateBoard(@PathVariable Integer id) {
-        SkateBoard skateBoard = skateBoardDaoService.deleteSkateBoardById(id);
+        SkateBoard skateBoard = skateBoardServiceImpl.deleteSkateBoardById(id);
 
         if (skateBoard == null)
             throw new SkateBoardNotFoundException("SkateBoard not found with id " + id);
@@ -86,15 +86,20 @@ public class SkateBoardResource {
         return ResponseEntity.status(200).build();
     }
 
-    @PutMapping("/api/v1/skateboards/{id}")
+    @PutMapping("/api/v1/skateboards/{id}/{ownerName}/{brand}/{length}/{weight}/{isAvailable}")
     public ResponseEntity<SkateBoard> updateSkateBoard(@PathVariable(value = "id") Integer id,
-                                                       @Valid @RequestBody SkateBoard skateBoardDetails) {
-        SkateBoard skateBoard = skateBoardDaoService.findOne(id);
+                                                       @PathVariable(value = "ownerName") String ownerName,
+                                                       @PathVariable(value = "brand") String brand,
+                                                       @PathVariable(value = "length") Integer length,
+                                                       @PathVariable(value = "weight") Integer weight,
+                                                       @PathVariable(value = "isAvailable") Boolean isAvailable
+    ) {
+        SkateBoard skateBoard = skateBoardServiceImpl.findOne(id);
 
         if (skateBoard == null)
             throw new SkateBoardNotFoundException("SkateBoard not found with id " + id);
 
-        final SkateBoard updateSkateBoard = skateBoardDaoService.updateSkateBoardDetails(id, skateBoardDetails);
+        SkateBoard updateSkateBoard = skateBoardServiceImpl.updateSkateBoardDetails(id, ownerName, brand,  length, weight, isAvailable);
 
         return ResponseEntity.ok(updateSkateBoard);
     }

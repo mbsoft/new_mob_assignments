@@ -1,14 +1,14 @@
-package com.detroitlabs.skateboard.dao;
+package com.detroitlabs.skateboard.service;
 
 import com.detroitlabs.skateboard.model.SkateBoard;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@Component
-public class SkateBoardDaoService {
+@Service
+public class SkateBoardServiceImpl implements SkateBoardService {
     private static List<SkateBoard> skateBoards = new ArrayList<>();
     private static int skateBoardsCount = 3;
 
@@ -19,10 +19,17 @@ public class SkateBoardDaoService {
     }
 
     public SkateBoard save(SkateBoard skateBoard) {
-        if (skateBoard.getId() == null) {
-            skateBoard.setId(++skateBoardsCount);
+        if (!(skateBoard.getId() == null)) {
+            Boolean isPresent = false;
+            for (SkateBoard skateBoard1 : skateBoards) {
+                if (skateBoard1.getId() == skateBoard.getId()) {
+                    isPresent = true;
+                }
+            }
+            if (!isPresent) {
+                skateBoards.add(skateBoard);
+            }
         }
-        skateBoards.add(skateBoard);
         return skateBoard;
     }
 
@@ -78,16 +85,15 @@ public class SkateBoardDaoService {
         return null;
     }
 
-
-    public SkateBoard updateSkateBoardDetails(Integer id, SkateBoard skateBoardDetails) {
+    public SkateBoard updateSkateBoardDetails(Integer id, String ownerName, String brand, Integer length, Integer weight, Boolean isAvailable) {
         for (SkateBoard skateBoard : skateBoards) {
             if (skateBoard.getId().equals(id)) {
 
-                skateBoard.setOwnerName(skateBoardDetails.getOwnerName());
-                skateBoard.setBrand(skateBoardDetails.getBrand());
-                skateBoard.setLength(skateBoardDetails.getLength());
-                skateBoard.setWeight(skateBoardDetails.getWeight());
-                skateBoard.setBoardAvailable(skateBoardDetails.isBoardAvailable());
+                skateBoard.setOwnerName(ownerName);
+                skateBoard.setBrand(brand);
+                skateBoard.setLength(length);
+                skateBoard.setWeight(weight);
+                skateBoard.setBoardAvailable(isAvailable);
 
                 return skateBoard;
             }

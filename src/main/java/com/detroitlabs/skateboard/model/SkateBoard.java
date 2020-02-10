@@ -6,11 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
 @ApiModel(description = "All details about SkateBoard")
@@ -18,24 +15,23 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
+@Component
 public class SkateBoard {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer id;
 
-    @Size(min = 2, message = "Owner Name should have atleast 2 characters")
-    @ApiModelProperty(notes = "Owner should have atleast 2 characters")
+    @Size(min = 2, message = "Owner Name should have at least 2 characters")
+    @ApiModelProperty(notes = "Owner should have at least 2 characters")
     private String ownerName;
 
-    @Size(min = 2, message = "Brand Name should have atleast 2 characters")
-    @ApiModelProperty(notes = "Brand should have atleast 2 characters")
+    @Size(min = 2, message = "Brand Name should have a t east 2 characters")
+    @ApiModelProperty(notes = "Brand should have at least 2 characters")
     private String brand;
 
-    @ApiModelProperty(notes = "Weight should be atleast 50 lb")
+    @ApiModelProperty(notes = "Weight should be at least 50 lb")
     private int weight;
 
-    @ApiModelProperty(notes = "Length should be atleast 15 cm")
+    @ApiModelProperty(notes = "Length should be at least 15 cm")
     private int length;
 
     @ApiModelProperty(notes = "Skateboard is available or not")

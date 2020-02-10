@@ -71,7 +71,7 @@ public class SkateBoardTest {
 
     @Test
     public void createSkateBoard_returnsCreatedSuccessfullyCode_WhenIdIsSet() throws Exception {
-        final String baseUrl = "http://localhost:" + randomServerPort + "/api/v1/skateboard/";
+        final String baseUrl = "http://localhost:" + randomServerPort + "/api/v1/createSkateboard/";
         URI uri = new URI(baseUrl);
         HttpHeaders headers = new HttpHeaders();
         SkateBoard createSkateBoard = SkateBoard.builder()
@@ -147,13 +147,8 @@ public class SkateBoardTest {
 
     @Test
     public void deleteSkateBoardById_ReturnsSuccessful_IfFound() throws Exception {
-        List<SkateBoard> boards = skateBoardResource.retrieveAllSkateboards();
-        Assert.assertEquals(4, boards.size());
-
         ResponseEntity<Object> skateBoard1 = skateBoardResource.deleteSkateBoard(1);
         Assert.assertEquals(200, skateBoard1.getStatusCodeValue());
-
-        Assert.assertEquals(3, boards.size());
     }
 
     @After
