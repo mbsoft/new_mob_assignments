@@ -1,65 +1,92 @@
 ### Skateboard REST API
 
-In the shared mobility space, there are a number of different types of shared assets - cars, scooters, ebikes. For this project, we want to create a starting point for an API that will allow individual skateboarders to share their boards. 
+```$xslt
+  ______  _                           _                               _
+ / _____)| |              _          | |                             | |
+( (____  | |  _  _____  _| |_  _____ | |__    ___   _____   ____   __| |   _____  ____   ____
+ \____ \ | |_/ )(____ |(_   _)| ___ ||  _ \  / _ \ (____ | / ___) / _  |  (____ ||  _ \ |  _ \
+ _____) )|  _ ( / ___ |  | |_ | ____|| |_) )| |_| |/ ___ || |    ( (_| |  / ___ || |_| || |_| |
+(______/ |_| \_)\_____|   \__)|_____)|____/  \___/ \_____||_|     \____|  \_____||  __/ |  __/
+                                                                                 |_|    |_|
+```
 
-The goal of this project is to assess development skills suitable for a backend developer position by testing knowledge and proficiency with software design, unit testing and web technologies like HTTP and REST.
+This is SkateBoard app with REST API's developed in SpringBoot 2, Lombok, Maven and Swagger2
 
-- **Project Name:** Skateboard REST API
-- **Project Goal:** Create/define an API that will help skateboarders to share their 'boards'
-- **Technology:** Pick any language, framework and testing framework you like
-- **Deliverables:**  Fork the project into your own account. Submit a pull request on https://github.com/mbsoft/new_mob_assignments that includes your complete solution
 
-**Description: (Note: these stories are intentionally somewhat vague)**
+Please free to modify the server port. The current state uses 8081 as server port.
 
-As a skateboard owner I want to be able to add my individual board to a skateboard sharing marketplace.
+Please use below URL's to browse
 
-As a skateboard owner I want to be able to indicate that my board is available or unavailable for sharing
+- **For APi docs:** Please visit http://localhost:8081/v2/api-docs
+- **To use swagger:** http://localhost:8081/swagger-ui.html#/
+- Please use below JSON format to test 
+    ```$xslt
+    {
+      "boardAvailable": true,
+      "brand": "string",
+      "id": 0,
+      "length": 0,
+      "ownerName": "string",
+      "weight": 0
+    }
+    ```
 
-As a skateboard owner I want to be able to modify the details for the board that I share.
-
-As a skateboard borrower, I want to see a list of available boards
-
-**Task:** Build the REST API that might support the stories described above. Write unit tests for each component.
-
-**Requirements:**
-
-1. Design your API in a RESTful way and respond with JSON.
-1. Make sure your code has tests.
-1. Consider some form of logging
-1. Write the code and design your system to be as realistic and production-ready as possible. Follow best-practices and focus on quality.
-1. A skateboard might have the following attributes: name of owner, brand, weight, length, location, timestamp and any other attribution you deem necessary
-1. Add endpoints that support your solution 
-1. Try to keep track of the time spent on the project as this might be discussed
-1. Bonus points for adding any kind of front-end that can be used to visualize available boards through use of the designed APIs
-some examples:
- 
-  * **Create skateboard:**
-
-    - attributes for a board might include the photo, dimensions, specs etc.
-    - To keep things simple, no authentication needs to be performed. 
-
-  * **Get skateboards**
-    - perhaps based on status, spec filter etc.
+* **Create skateboard:**
+    - http://localhost:8081/api/v1/createSkateboard
+        ```$xslt
+         curl -X POST "http://localhost:8081/api/v1/createSkateboard" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"boardAvailable\": true, \"brand\": \"Nike\", \"id\": 4, \"length\": 14, \"ownerName\": \"Rohan\", \"weight\": 35}"
+        ```
+   
+* **Get skateboards:**
+    - http://localhost:8081/api/v1/skateboards
+        ```$xslt
+        curl -X GET "http://localhost:8081/api/v1/skateboards" -H "accept: application/json"
+        ```
+    - http://localhost:8081/api/v1/skateboards/3
+        ```$xslt
+        curl -X GET "http://localhost:8081/api/v1/skateboards/3" -H "accept: application/json"
+        ```
+    - http://localhost:8081/api/v1/skateboards/byBrand/Nike
+        ```$xslt
+        curl -X GET "http://localhost:8081/api/v1/skateboards/byBrand/Nike" -H "accept: application/json"
+        ```
+    - http://localhost:8081/api/v1/skateboards/byLength/24
+        ```$xslt
+        curl -X GET "http://localhost:8081/api/v1/skateboards/byLength/24" -H "accept: application/json"
+        ```
+    - http://localhost:8081/api/v1/skateboards/byWeight/48
+        ```$xslt
+        curl -X GET "http://localhost:8081/api/v1/skateboards/byWeight/48" -H "accept: application/json"
+        ```
     
-  * **Update skateboard**
-    - change status, add additional details/specs etc.
+* **Update skateboard**
+    - http://localhost:8081/api/v1/skateboards/2/Tom/Reebok/34/45/false
+        ```$xslt
+        curl -X PUT "http://localhost:8081/api/v1/skateboards/2/Tom/Reebok/34/45/false" -H "accept: application/json"
+        ```
   
-  * **Delete skateboard**
-  
-  
- ....
+* **Delete skateboard**
+    - http://localhost:8081/api/v1/skateboards/2
+        ```$xslt
+        curl -X DELETE "http://localhost:8081/api/v1/skateboards/2" -H "accept: application/json"
+        ```
 
-1. Describe your solution in a README and how to run it. Ensure that you clearly state assumptions that you made.
+- **To Build app:**
+    ```$xslt
+    mvn compile
+    ```
+- **To install app:** 
+    ```$xslt
+    mvn install
+    ```
+- **To Run Tests:**
+    ```$xslt
+    mvn test
+    ```
+- **To Start app:**
+    ```$xslt
+    mvn spring-boot:run
+    ```
 
-
-**Guidelines**
-
-Please commit early and often and with good commit messages. This will allow us to see how you've approached the problem. Don't worry about changing things around often.
-
-Be prepared to discuss some of your approaches and design decisions.
- 
-Please ask any questions if something is unclear
-
-**What is this?**
-
-This repo contains the job assignment for potential Backend engineers in DENSO's New Mobility team.
+- **Swagger UI preview:**
+![Alt text](SkateBoard-Swagger-ui.png?raw=true "Swagger-UI")
