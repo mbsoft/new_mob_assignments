@@ -13,12 +13,13 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/")
 public class SkateBoardResource {
 
     @Autowired
     private SkateBoardServiceImpl skateBoardServiceImpl;
 
-    @PostMapping(path = "/api/v1/createSkateboard")
+    @PostMapping(path = "createSkateboard")
     public ResponseEntity<Object> createSkateBoard(@Valid @RequestBody SkateBoard skateBoard) {
         SkateBoard createSkateBoard = skateBoardServiceImpl.save(skateBoard);
 
@@ -31,7 +32,7 @@ public class SkateBoardResource {
         return ResponseEntity.created(location).build();
     }
 
-    @GetMapping(path = "/api/v1/skateboards/{id}")
+    @GetMapping(path = "skateboards/{id}")
     public SkateBoard retrieveSkateBoard(@PathVariable Integer id) {
         SkateBoard skateBoard = skateBoardServiceImpl.findOne(id);
 
@@ -41,12 +42,12 @@ public class SkateBoardResource {
         return skateBoard;
     }
 
-    @GetMapping(path = "/api/v1/skateboards")
+    @GetMapping(path = "skateboards")
     public List<SkateBoard> retrieveAllSkateboards() {
         return skateBoardServiceImpl.findAll();
     }
 
-    @GetMapping("/api/v1/skateboards/byLength/{length}")
+    @GetMapping("skateboards/byLength/{length}")
     public SkateBoard retrieveSkateBoardByLength(@PathVariable Integer length) {
         SkateBoard skateBoard = skateBoardServiceImpl.findByLength(length);
 
@@ -56,7 +57,7 @@ public class SkateBoardResource {
         return skateBoard;
     }
 
-    @GetMapping("/api/v1/skateboards/byWeight/{weight}")
+    @GetMapping("skateboards/byWeight/{weight}")
     public SkateBoard retrieveSkateBoardByWeight(@PathVariable Integer weight) {
         SkateBoard skateBoard = skateBoardServiceImpl.findByWeight(weight);
 
@@ -66,7 +67,7 @@ public class SkateBoardResource {
         return skateBoard;
     }
 
-    @GetMapping("/api/v1/skateboards/byBrand/{brand}")
+    @GetMapping("skateboards/byBrand/{brand}")
     public SkateBoard retrieveSkateBoardByBrand(@PathVariable String brand) {
         SkateBoard skateBoard = skateBoardServiceImpl.findByBrand(brand);
 
@@ -76,7 +77,7 @@ public class SkateBoardResource {
         return skateBoard;
     }
 
-    @DeleteMapping("/api/v1/skateboards/{id}")
+    @DeleteMapping("skateboards/{id}")
     public ResponseEntity<Object> deleteSkateBoard(@PathVariable Integer id) {
         SkateBoard skateBoard = skateBoardServiceImpl.deleteSkateBoardById(id);
 
@@ -86,7 +87,7 @@ public class SkateBoardResource {
         return ResponseEntity.status(200).build();
     }
 
-    @PutMapping("/api/v1/skateboards/{id}/{ownerName}/{brand}/{length}/{weight}/{isAvailable}")
+    @PutMapping("skateboards/{id}/{ownerName}/{brand}/{length}/{weight}/{isAvailable}")
     public ResponseEntity<SkateBoard> updateSkateBoard(@PathVariable(value = "id") Integer id,
                                                        @PathVariable(value = "ownerName") String ownerName,
                                                        @PathVariable(value = "brand") String brand,
