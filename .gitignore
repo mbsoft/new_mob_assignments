@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Skateboard.REST.API/.vs/Skateboard.REST.API
+/Skateboard.REST.API/Skateboard.REST.API/bin/Debug/netcoreapp3.1
+/Skateboard.REST.API/Skateboard.REST.API/obj
