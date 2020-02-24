@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using System.IO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Skateboard.REST.API.DataRepository;
+using Skateboard.REST.API.Requests;
+using Newtonsoft.Json;
+using Skateboard.REST.API.Responses;
 
 namespace Skateboard.REST.API.Controllers
 {
@@ -11,36 +13,74 @@ namespace Skateboard.REST.API.Controllers
     [ApiController]
     public class OwnerController : ControllerBase
     {
-        // GET: api/Owner
-        [HttpGet]
-        public IEnumerable<string> Get()
+
+        private readonly ILogger<OwnerController> _logger;
+        private readonly ISkateboardRepositoryService _skateboardRepositoryService;
+        private Guid _uniqueLogId;
+
+        public OwnerController(ISkateboardRepositoryService skateboardRepository, ILogger<OwnerController> logger)
         {
-            return new string[] { "value1", "value2" };
+            _logger = logger;
+            _skateboardRepositoryService = skateboardRepository;
         }
 
-        // GET: api/Owner/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+
+        private void LogIt(string msg, bool isError = false)
         {
-            return "value";
+            if (isError)
+            {
+                _logger.LogInformation($"{_uniqueLogId}: {msg}");
+                Console.WriteLine($"{_uniqueLogId}: {msg}");
+                return;
+            }
+
+            _logger.LogError($"{_uniqueLogId}: {msg}");
+            TextWriter txtWriter = Console.Error;
+            try
+            {
+                txtWriter.WriteLine($"{_uniqueLogId}: {msg}");
+            }
+            finally
+            {
+                txtWriter.Dispose();
+            }
         }
 
-        // POST: api/Owner
+
+        // POST: api/Skateboard/Owner
         [HttpPost]
-        public void Post([FromBody] string value)
+        public OwnerStakeboardResponse Post([FromBody] OwnerSkateboardRequest request)
         {
+            _uniqueLogId = Guid.NewGuid();
+            try
+            {
+                LogIt("Executing Post([FromBody] OwnerSkateboardRequest request");
+
+                if (request == null)
+                {
+                    LogIt("incoming reqest is null!");
+                    return new OwnerStakeboardResponse()
+                    {
+                        IsOperationSuccess = false,
+                        ReturnMessage = $"Request is null!"
+                    };
+                }
+
+                LogIt("incoming request:");
+                LogIt(JsonConvert.SerializeObject(request));
+
+                return _skateboardRepositoryService.ProcessOwnerRequest(request, _uniqueLogId);
+            }
+            catch (Exception ex)
+            {
+                LogIt($"Failure in POST endpoint - error: {ex.Message}");
+                return new OwnerStakeboardResponse()
+                {
+                    IsOperationSuccess = false,
+                    ReturnMessage = $"Failure in POST endpoint due to internale exception!"
+                };
+            }
         }
 
-        // PUT: api/Owner/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
