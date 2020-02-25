@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var skateboardRouter = require('./routes/skateboard');
 var skateboardsRouter = require('./routes/skateboards');
-
+var versionControl = require('./middlewares/version');
 var app = express();
 
 // view engine setup
@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(versionControl);
 app.use('/', indexRouter);
 app.use('/skateboard', skateboardRouter);
 app.use('/skateboards', skateboardsRouter);
@@ -35,6 +35,8 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  // log console.error();
+  console.error(err);
   // render the error page
   res.status(err.status || 500);
   res.render('error');
