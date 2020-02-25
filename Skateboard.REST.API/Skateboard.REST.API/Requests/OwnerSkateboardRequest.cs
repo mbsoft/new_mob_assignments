@@ -18,10 +18,10 @@ namespace Skateboard.REST.API.Requests
         [DataMember(Name = "owner_id")]
         public int OwnerId { get; set; }
 
-        [DataMember(Name = "is_avavlable")]//0-1-2
+        [DataMember(Name = "is_available")]//filter = 0-1-2
         public int IsAvailable { get; set; }
 
-        [DataMember(Name = "is_checkedout")]//0-1-2
+        [DataMember(Name = "is_checkedout")]//filter = 0-1-2
         public int IsCheckedOut { get; set; }
 
     }
