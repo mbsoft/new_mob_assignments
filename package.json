@@ -1,0 +1,27 @@
+{
+  "name": "rest-skateboard",
+  "version": "1.0.0",
+  "description": "A Node.js RESTful API Project (Build a simple Skateboard API)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayush666/new_mob_assignments.git"
+  },
+  "keywords": [
+    "node",
+    "restful",
+    "api"
+  ],
+  "author": "Ayush Pawar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ayush666/new_mob_assignments/issues"
+  },
+  "homepage": "https://github.com/Ayush666/new_mob_assignments#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
