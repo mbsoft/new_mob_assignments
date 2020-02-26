@@ -2,19 +2,22 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var httpLogger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var skateboardRouter = require('./routes/skateboard');
 var skateboardsRouter = require('./routes/skateboards');
 var versionControl = require('./middlewares/version');
+
+var logger = require('./utils/logger');
+
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev'));
+app.use(httpLogger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -28,6 +31,8 @@ app.use('/skateboards', skateboardsRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+logger.warn("Sever start up!");
 
 // error handler
 app.use(function(err, req, res, next) {
