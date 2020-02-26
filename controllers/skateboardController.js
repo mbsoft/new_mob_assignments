@@ -1,4 +1,5 @@
 var logger = require('../utils/logger');
+const config = require('config');
 
 exports.create = function(req, res, next) {
 
@@ -6,8 +7,19 @@ exports.create = function(req, res, next) {
 }
 
 exports.get = function(req, res, next) {
-  logger.info('Getting a skateboard details. Id is:' + req.params.skateboardId + " API version:" + req.api_version);
-  res.send('Getting a skateboard details. Id is:' + req.params.skateboardId + " API version:" + req.api_version);
+  var skateboards = config.get('skateboards');
+
+  if(skateboards.hasOwnProperty(req.params.skateboardId)){
+    var respData = {};
+    respData.api_version = req.api_version;
+    respData.data = skateboards[req.params.skateboardId];
+    res.send(respData);
+  }else{
+    res.status(404)        // HTTP status 404: NotFound
+       .send('Skateboard not found. Id:' + req.params.skateboardId);
+    logger.warn('Skateboard not found. Id:' + req.params.skateboardId);
+  }
+
 }
 
 exports.update = function(req, res, next) {
