@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "User Type Page";
+}
+
+@model SkateboardSharingApp.Models.CustomerDetails
+
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome To The Skateboard Sharing application</h1>
+</div>
+<br />
+<br />
+<div style="text-align : left">
+    @using (Html.BeginForm())
+    {
+        <div>----------PLEASE SELECT TYPE OF USER------------</div>
+
+        foreach (var a in Model.UserTypes)
+        {
+            <div>
+                @Html.RadioButtonFor(m => m.SelectedUserType, a)
+                @Html.Label(a)
+            </div>
+        }
+
+        <br />
+        <br />
+
+        var aa = new List<SelectListItem>();
+        foreach (var id in Model.UserIds)
+        {
+            aa.Add(new SelectListItem { Value = id.ToString(), Text = id.ToString() });
+        }
+        <div>----------PLEASE SELECT TYPE OF USER------------</div>
+
+        @Html.DropDownList("SelectedUserId", (IEnumerable<SelectListItem>)aa, "All Ids")
+
+
+        <br />
+        <br />
+
+        @*<a asp-action="Procceed" asp-route-id="@Model.SelectedUserType">Procceed</a>*@
+
+        <input id="Submit1" type="submit" value="submit" />
+    }
+
+</div>
