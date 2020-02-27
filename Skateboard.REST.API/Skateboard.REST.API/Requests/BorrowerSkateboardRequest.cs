@@ -7,13 +7,13 @@ namespace Skateboard.REST.API.Requests
     public class BorrowerSkateboardRequest
     {
 
-        [DataMember(Name = "message_type")]
+        [DataMember]
         public int MessageType { get; set; }
 
-        [DataMember(Name = "skateboard_id")]
+        [DataMember]
         public int? SkateboardId { get; set; }
 
-        [DataMember(Name = "borrower_id")]
+        [DataMember]
         public int BorrowerId { get; set; }
     }
 }

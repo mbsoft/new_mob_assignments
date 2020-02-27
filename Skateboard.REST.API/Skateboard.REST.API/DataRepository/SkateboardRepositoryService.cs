@@ -272,6 +272,7 @@ namespace Skateboard.REST.API.DataRepository
                     };
                 }
 
+                skateboard.OwnerId = board.OwnerId;
                 Skateboards.Remove(board);
                 Skateboards.Add(skateboard);
 
@@ -344,13 +345,23 @@ namespace Skateboard.REST.API.DataRepository
         {
             try
             {
-                if (request.OwnerId <= 0)
+                if (request.OwnerId < 0)
                 {
                     LogIt("Failed to load Skateboards, owner id was null!");
                     return new OwnerStakeboardResponse()
                     {
                         IsOperationSuccess = false,
                         ReturnMessage = "Failed to load Skateboards, owner id was null!"
+                    };
+                }
+
+                if (request.OwnerId == 0)
+                {
+                    return new OwnerStakeboardResponse()
+                    {
+                        IsOperationSuccess = true,
+                        OwnerSkateboards = Skateboards,
+                        ReturnMessage = $"Successfully loaded All skateboards!"
                     };
                 }
 
@@ -416,7 +427,6 @@ namespace Skateboard.REST.API.DataRepository
                     return new OwnerStakeboardResponse()
                     {
                         IsOperationSuccess = false,
-                        Skateboard = board,
                         ReturnMessage = $"Failed to load Skateboard, no skateboard with id {skateboardId} exist!"
                     };
                 }
@@ -426,6 +436,7 @@ namespace Skateboard.REST.API.DataRepository
                 return new OwnerStakeboardResponse()
                 {
                     IsOperationSuccess = true,
+                    Skateboard = board,
                     ReturnMessage = $"Successfully loaded skateboard!"
                 };
             }

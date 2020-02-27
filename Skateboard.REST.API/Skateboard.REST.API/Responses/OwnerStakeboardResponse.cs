@@ -6,16 +6,16 @@ namespace Skateboard.REST.API.Responses
     [DataContract]
     public class OwnerStakeboardResponse
     {
-        [DataMember(Name = "Skateboard")]
+        [DataMember]
         public Models.Skateboard Skateboard { get; set; }
 
-        [DataMember(Name = "is_operation_success")]
+        [DataMember]
         public bool IsOperationSuccess { get; set; }
 
-        [DataMember(Name = "return_message")]
+        [DataMember]
         public string ReturnMessage { get; set; }
 
-        [DataMember(Name = "add_edit_Skateboard")]
+        [DataMember]
         public List<Models.Skateboard> OwnerSkateboards { get; set; }
     }
 }

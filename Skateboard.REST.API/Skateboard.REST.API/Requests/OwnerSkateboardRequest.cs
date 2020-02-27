@@ -6,22 +6,22 @@ namespace Skateboard.REST.API.Requests
 
     public class OwnerSkateboardRequest
     {
-        [DataMember(Name = "message_type")]
+        [DataMember]
         public int MessageType { get; set; }
 
-        [DataMember(Name = "skateboard_id")]
+        [DataMember]
         public int? SkateboardId { get; set; }
 
-        [DataMember(Name = "add_edit_Skateboard")]
+        [DataMember]
         public Models.Skateboard AddEditSkateboard { get; set; }
 
-        [DataMember(Name = "owner_id")]
+        [DataMember]
         public int OwnerId { get; set; }
 
-        [DataMember(Name = "is_available")]//filter = 0-1-2
+        [DataMember]
         public int IsAvailable { get; set; }
 
-        [DataMember(Name = "is_checkedout")]//filter = 0-1-2
+        [DataMember]
         public int IsCheckedOut { get; set; }
 
     }

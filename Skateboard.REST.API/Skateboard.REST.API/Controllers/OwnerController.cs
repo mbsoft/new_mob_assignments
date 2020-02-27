@@ -49,7 +49,7 @@ namespace Skateboard.REST.API.Controllers
 
         // POST: api/Skateboard/Owner
         [HttpPost]
-        public OwnerStakeboardResponse Post([FromBody] OwnerSkateboardRequest request)
+        public OwnerStakeboardResponse Post(OwnerSkateboardRequest request)
         {
             _uniqueLogId = Guid.NewGuid();
             try

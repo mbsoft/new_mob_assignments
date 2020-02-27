@@ -26,19 +26,25 @@ namespace Skateboard.REST.API.Models
         [DataMember(Name = "owner_id")]
         public int OwnerId { get; set; }
 
-        [DataMember(Name = "is_avavlable")]
+        [DataMember(Name = "is_available")]
         public bool IsAvailable { get; set; }
 
+        [DataMember(Name = "skateboardId")]
         public int SkateboardId { get; set; }
 
+        [DataMember(Name = "borrowerId")]
         public int? BorrowerId { get; set; }
 
+        [DataMember(Name = "is_checkedOut")]
         public bool IsCheckedOut { get; set; }
 
+        [DataMember(Name = "checkedOutDt")]
         public DateTime? CheckedOutDt { get; set; }
 
+        [DataMember(Name = "returnDt")]
         public DateTime? ReturnDt { get; set; }
 
+        [DataMember(Name = "location")]
         public Location Location { get; set; }
     }
 }

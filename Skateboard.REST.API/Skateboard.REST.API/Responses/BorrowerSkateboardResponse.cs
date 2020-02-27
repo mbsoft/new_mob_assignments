@@ -5,16 +5,16 @@ namespace Skateboard.REST.API.Responses
     [DataContract]
     public class BorrowerSkateboardResponse
     {
-        [DataMember(Name = "Skateboard")]
+        [DataMember]
         public Models.Skateboard Skateboard { get; set; }
 
-        [DataMember(Name = "is_operation_success")]
+        [DataMember]
         public bool IsOperationSuccess { get; set; }
 
-        [DataMember(Name = "return_message")]
+        [DataMember]
         public string ReturnMessage { get; set; }
 
-        [DataMember(Name = "available_skateboards")]
+        [DataMember]
         public List<Models.Skateboard> AvailableSkateboards { get; set; }
 
     }
