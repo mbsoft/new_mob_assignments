@@ -1,0 +1,45 @@
+{
+  "skateboards":[
+    {
+      "id": 1,
+      "ownerId": 1,
+      "brand": "GoodOne company",
+      "weight": 36,
+      "length": 50,
+      "location": {
+        "x": 120,
+        "y": 20
+      },
+      "creaetAt": "2020-02-26 00:01:02.444Z",
+      "updateAt": "2020-02-26 00:01:02.444Z"
+    },
+    {
+      "id": 2,
+      "ownerId": 2,
+      "brand": "Bad company",
+      "weight": 35.5,
+      "length": 50,
+      "location": {
+        "x": 90,
+        "y": 20
+      },
+      "creaetAt": "2020-02-26 00:03:02.444Z",
+      "updateAt": "2020-02-26 00:03:02.444Z"
+    },
+    {
+      "id": 3,
+      "ownerId": 2,
+      "brand": "GoodOne company",
+      "weight": 27.5,
+      "length": 50,
+      "location": {
+        "x": 110,
+        "y": 20
+      },
+      "creaetAt": "2020-02-26 00:02:02.444Z",
+      "updateAt": "2020-02-26 00:02:02.444Z"
+    }
+
+  ]
+
+}
