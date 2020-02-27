@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  description: "Skateboard sharing API"
+  version: "1.0.0"
+  title: "Skateboard API"
+basePath: "/api"
+schemes:
+  - "http"
+
+paths:
+  /skateboard/{skateboardId}:
+    get:
+      tags:
+        - "root"
+      summary: "Get Skateboard Information"
+      parameters:
+        - in: path
+          name: skateboardId
+          type: integer
+          required: true
+          description: ID of the skateboard to get.
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Successfully get a skateboard by ID"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Skateboard"
+        404:
+          description: A skateboard with the specified ID was not found.
+
+components:
+  schemas:
+    Skateboard:
+      type: object
+      properties:
+        id:
+          type: integer
+        ownerId:
+          type: integer
+        brand:
+          type: string
+        weight:
+          type: integer
+        length:
+          type: integer
+        creaetAt:
+          type: string
+        updateAt:
+          type: string

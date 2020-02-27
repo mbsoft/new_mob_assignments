@@ -9,6 +9,11 @@ var skateboardRouter = require('./routes/skateboard');
 var skateboardsRouter = require('./routes/skateboards');
 var versionControl = require('./middlewares/version');
 
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
+
+
 var logger = require('./utils/logger');
 
 var app = express();
@@ -16,6 +21,8 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(httpLogger('dev'));
 app.use(express.json());
