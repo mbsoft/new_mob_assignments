@@ -1,0 +1,31 @@
+<h3><a class="btn btn-secondary" href="/skateboard"><i class="fa fa-plus"></i> Create New</a> Skateboard List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Owner's Name</th>
+            <th>Brand</th>
+            <th>Weight</th>
+            <th>Length</th>
+            <th>Location</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <script>console.log({{ list }})</script>
+        {{#each list}}
+        <tr>
+            <td>{{this}}</td>
+            <td>{{this.brand}}</td>
+            <td>{{this.weight}}</td>
+            <td>{{this.length}}</td>
+            <td>{{this.location}}</td>
+            <td>
+                <a href="/skateboard/{{this._id}}"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                <a href="/skateboard/delete/{{this._id}}"
+                    onclick="return confirm('Are you sure to delete this record ?');"><i class="fa fa-trash fa-lg"
+                        aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

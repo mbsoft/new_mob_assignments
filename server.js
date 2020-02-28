@@ -1,6 +1,34 @@
-const http = require("http");
-const app = require("./app");
-const port = process.env.port || 3000;
-const server = http.createServer(app);
+require("./models/db");
 
-server.listen(port);
+const express = require("express");
+const path = require("path");
+const exphbs = require("express-handlebars");
+const bodyparser = require("body-parser");
+
+const skateboardController = require("./controllers/skateboardController");
+
+var app = express();
+
+app.use(
+  bodyparser.urlencoded({
+    extended: true
+  })
+);
+app.use(bodyparser.json());
+
+app.set("views", path.join(__dirname, "/views/"));
+app.engine(
+  "hbs",
+  exphbs({
+    extname: "hbs",
+    defaultLayout: "mainLayout",
+    layoutsDir: __dirname + "/views/layouts/"
+  })
+);
+app.set("view engine", "hbs");
+
+app.listen(3000, () => {
+  console.log("Express server started at port: 3000");
+});
+
+app.use("/skateboard", skateboardController);
