@@ -1,0 +1,37 @@
+<h3>{{viewTitle}}</h3>
+
+<form action="/skateboard" method="POST" autocomplete="off">
+    <input type="hidden" name="_id" value="{{skateboard._id}}">
+    <div class="form-group">
+        <label>Name of Owner</label>
+        <input type="text" class="form-control" name="ownerName" placeholder="Owner's Name"
+            value="{{skateboard.ownerName}}">
+        <div class="text-danger">{{skateboard.ownerNameError}}</div>
+    </div>
+    <div class="form-group">
+        <label>Brand</label>
+        <input type="text" class="form-control" name="brand" placeholder="Brand" value="{{skateboard.brand}}">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Weight</label>
+            <input type="number" class="form-control" name="weight" placeholder="Weight" value="{{skateboard.weight}}">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Length</label>
+            <input type="number" class="form-control" name="length" placeholder="Length" value="{{skateboard.length}}">
+        </div>
+        <div class="form-group col-md-6">
+            <label>Location</label>
+            <input type="text" class="form-control" name="location" placeholder="Location"
+                value="{{skateboard.location}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-info"> <i class="fa fa-database"></i>
+            Submit
+        </button>
+        <a class="btn btn-secondary" href="/skateboard/list"><i class="fa fa-list-alt"></i>View All</a>
+    </div>
+
+</form>
